@@ -15,7 +15,10 @@ async function* repositoryFiles(directory = ROOT): AsyncGenerator<URL> {
     if (entry.name === ".git") continue;
 
     const suffix = entry.isDirectory ? "/" : "";
-    const url = new URL(`${encodeURIComponent(entry.name)}${suffix}`, directory);
+    const url = new URL(
+      `${encodeURIComponent(entry.name)}${suffix}`,
+      directory,
+    );
     if (entry.isDirectory) {
       yield* repositoryFiles(url);
     } else if (entry.isFile) {
@@ -92,7 +95,9 @@ async function validateMarkdownLinks(errors: string[]): Promise<number> {
       checked += 1;
       if (!(await exists(target))) {
         errors.push(
-          `${relativePath(markdown)}: missing local link ${JSON.stringify(match[1])}`,
+          `${relativePath(markdown)}: missing local link ${
+            JSON.stringify(match[1])
+          }`,
         );
       }
     }
@@ -131,7 +136,9 @@ async function main(): Promise<void> {
     Deno.exit(1);
   }
 
-  console.log(`Validated ${structured} structured files and ${links} local links.`);
+  console.log(
+    `Validated ${structured} structured files and ${links} local links.`,
+  );
 }
 
 await main();
