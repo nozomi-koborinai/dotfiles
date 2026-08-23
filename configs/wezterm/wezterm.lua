@@ -22,33 +22,27 @@ config.color_scheme = "Kanagawa Dragon (Gogh)"
 ----------------------------------------------------
 -- Tab
 ----------------------------------------------------
--- タイトルバーを非表示
+-- Drop the title bar but keep the resize handles
 config.window_decorations = "RESIZE"
--- タブバーの表示
 config.show_tabs_in_tab_bar = true
--- タブが一つでも常に表示
 config.hide_tab_bar_if_only_one_tab = false
--- falseにするとタブバーの透過が効かなくなる
+-- Setting this to false costs the tab bar its transparency
 -- config.use_fancy_tab_bar = false
 
--- タブバーの透過
+-- Let the tab bar show the background through, and match the window behind it
 config.window_frame = {
   inactive_titlebar_bg = "none",
   active_titlebar_bg = "none",
 }
 
--- タブバーを背景色に合わせる
 config.window_background_gradient = {
   colors = { "#000000" },
 }
 
--- タブの追加ボタンを非表示
 config.show_new_tab_button_in_tab_bar = false
--- nightlyのみ使用可能
--- タブの閉じるボタンを非表示
+-- Nightly only
 config.show_close_tab_button_in_tabs = false
 
--- ハイパーリンクルール（デフォルト + カスタム）
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 -- GitHub issue/PR: owner/repo#123
 table.insert(config.hyperlink_rules, {
@@ -56,7 +50,7 @@ table.insert(config.hyperlink_rules, {
   format = "https://github.com/$1/issues/$2",
 })
 
--- タブ同士の境界線を非表示
+-- No dividing line between tabs
 config.colors = {
   tab_bar = {
     inactive_tab_edge = "none",
@@ -66,20 +60,19 @@ config.colors = {
   cursor_border = "#e8874a",
 }
 
--- カーソルスタイル
 config.default_cursor_style = "BlinkingBar"
 config.cursor_blink_rate = 530
 
--- タブの形をカスタマイズ
+-- Rounded ends give each tab its shape
 local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_half_circle_thick
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_right_half_circle_thick
 
 wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
   local raw_title = tab.active_pane.title
 
-  -- Claude Code 判定
   local is_claude = raw_title:find("Claude Code") ~= nil
-  -- スピナー検出（アイコンが ✳ 以外ならスピナー＝考え中）
+  -- Claude Code puts a spinner where its ✳ normally sits while it is thinking,
+  -- so any other leading glyph means the tab is busy.
   local icon = raw_title:match("^(%S+)")
   local is_thinking = is_claude and icon and icon ~= "✳" and icon ~= "❯"
 
@@ -109,7 +102,7 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, max_width)
 end)
 
 ----------------------------------------------------
--- Command Palette: vde-layout プリセット
+-- Command Palette: vde-layout presets
 ----------------------------------------------------
 wezterm.on("augment-command-palette", function()
   return {

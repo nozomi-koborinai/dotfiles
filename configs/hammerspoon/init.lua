@@ -1,4 +1,4 @@
--- Hammerspoon: leader key でウィンドウ管理
+-- Hammerspoon: window management behind a leader key
 -- Leader: Ctrl+A → {action key}
 
 local leader = hs.hotkey.modal.new()
@@ -13,16 +13,16 @@ end)
 
 leader:exited(function() timeout:stop() end)
 
--- マウスカーソルをウィンドウ中央に移動
+-- Move the mouse to the centre of the window
 local function centerMouse(win)
   if not win then return end
   local f = win:frame()
   hs.mouse.setAbsolutePosition({ x = f.x + f.w / 2, y = f.y + f.h / 2 })
 end
 
--- フォーカス中なら隠す、そうでなければフォーカス
--- bundleID があるときは起動・判定ともそちらを使う（Ableton のように
--- バンドル名とプロセス名が違うアプリ向け）
+-- Hide the app when it already has focus, otherwise bring it up. Apps whose
+-- bundle name differs from their process name (Ableton, for one) are launched
+-- and matched by bundle ID instead.
 local function toggleApp(appName, bundleID)
   local app = hs.application.frontmostApplication()
   local focused = app and ((bundleID and app:bundleID() == bundleID) or (not bundleID and app:name() == appName))
@@ -43,14 +43,14 @@ end
 -- Window
 ----------------------------------------------------
 
--- z: maximize (WezTerm の Leader+z と統一)
+-- z: maximize, matching WezTerm's Leader+z
 leader:bind("", "z", function()
   local win = hs.window.focusedWindow()
   if win then win:maximize() end
   leader:exit()
 end)
 
--- hjkl: 方向でウィンドウフォーカス切り替え
+-- hjkl: move focus to the window in that direction
 local directions = {
   h = "West",
   j = "South",
@@ -67,7 +67,7 @@ for key, dir in pairs(directions) do
   end)
 end
 
--- Shift + HJKL: アクティブウィンドウをディスプレイ間移動
+-- Shift + HJKL: move the active window to the display in that direction
 for key, dir in pairs(directions) do
   leader:bind("shift", key, function()
     local win = hs.window.focusedWindow()
@@ -100,8 +100,8 @@ leader:bind("", "e", function() toggleApp("Live", "com.ableton.live") end)
 leader:bind("", "g", function() toggleApp("Grok Bot") end)
 
 ----------------------------------------------------
--- Split: 左右分割（比率指定）
--- フォーカス中 → 左、直前のウィンドウ → 右
+-- Split: two windows side by side at a given ratio.
+-- The focused window takes the left, the one behind it the right.
 ----------------------------------------------------
 
 local function splitWindows(leftRatio)
@@ -135,7 +135,7 @@ local function splitWindows(leftRatio)
   leader:exit()
 end
 
--- 数字 = 左側の比重 (1:1, 2:1, 3:1)
+-- The digit picks the left window's share: 1:1, 2:1, 3:1
 leader:bind("", "1", function() splitWindows(1 / 2) end)
 leader:bind("", "2", function() splitWindows(2 / 3) end)
 leader:bind("", "3", function() splitWindows(3 / 4) end)
@@ -144,8 +144,8 @@ leader:bind("", "3", function() splitWindows(3 / 4) end)
 leader:bind("", "escape", function() leader:exit() end)
 
 ----------------------------------------------------
--- Cursor split: Cursor.app を左 65%, WezTerm を右 35% に配置
--- bin/nzm-cursor-split が hammerspoon://cursor-split-start を叩く
+-- Cursor split: Cursor.app on the left 65%, WezTerm on the right 35%.
+-- bin/nzm-cursor-split reaches this through hammerspoon://cursor-split-start
 ----------------------------------------------------
 
 local function cursorSplitFrames(screen)
@@ -190,7 +190,7 @@ hs.urlevent.bind("cursor-split-start", function()
   local leftFrame, rightFrame = cursorSplitFrames(wt:screen())
   wt:setFrame(rightFrame)
 
-  -- 既存の Cursor ウィンドウ ID を記録し、新しく出現したウィンドウを検出する
+  -- Note which windows Cursor already has, so the one it opens next stands out
   local existingIds = getCursorWindowIds()
 
   local newWin = findNewCursorWindow(existingIds)
@@ -211,7 +211,7 @@ hs.urlevent.bind("cursor-split-start", function()
       wt:focus()
     elseif attempts >= 25 then
       poller:stop()
-      -- フォールバック: 既存の Cursor メインウィンドウを使う
+      -- Fall back to whatever main window Cursor already had
       local app = hs.application.get("Cursor")
       if app and app:mainWindow() then
         app:mainWindow():setFrame(leftFrame)

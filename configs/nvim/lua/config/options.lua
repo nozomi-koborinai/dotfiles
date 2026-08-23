@@ -14,7 +14,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.swapfile = false
 
--- 背景透過（WezTerm の透過と合わせる）
+-- Transparent background, so WezTerm's own transparency shows through
 local function set_transparent_bg()
   vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
   vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
@@ -31,7 +31,7 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_transparent_bg })
 
--- Dashboard の色を青に統一
+-- Keep the dashboard in a single blue
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "dashboard",
   callback = function()

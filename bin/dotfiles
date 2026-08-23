@@ -41,13 +41,6 @@ case "${1:-}" in
       git -C "$HOME/.zeno" pull
     fi
 
-    # cursor-agent (setup.sh handles the first install)
-    if command -v cursor-agent &> /dev/null; then
-      echo ""
-      echo "==> cursor-agent"
-      curl https://cursor.com/install -fsSL | bash
-    fi
-
     # vde-layout
     if command -v npm &> /dev/null; then
       echo ""

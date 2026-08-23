@@ -1,4 +1,4 @@
--- Leader key (lazy.nvim より先に設定)
+-- Leader key, set before lazy.nvim loads
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

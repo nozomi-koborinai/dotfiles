@@ -1,4 +1,4 @@
--- work/ 配下の新規 .md ファイルにテンプレートを自動挿入
+-- Seed new .md files created under work/ with a template
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*/work/*.md",
   callback = function()

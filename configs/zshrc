@@ -1,4 +1,4 @@
-# ===== WezTerm Shell Integration (OSC 133: ScrollToPrompt 用) =====
+# ===== WezTerm shell integration (OSC 133, what ScrollToPrompt reads) =====
 if [[ "$TERM_PROGRAM" == "WezTerm" ]]; then
   precmd() { printf "\e]133;A\e\\" }
   preexec() { printf "\e]133;C\e\\" }
@@ -17,16 +17,13 @@ autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Node version manager. --use-on-cd picks up .nvmrc / .node-version per project.
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
-
-export PATH="$HOME/.genkit/bin:$PATH"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export PATH="$HOME/.local/bin:$PATH"
@@ -45,19 +42,19 @@ fi
 
 # ===== Git Worktree Helpers =====
 
-# gwt <branch-name> → ../git-worktrees/<repo-name>-<branch-name> に worktree 作成
+# gwt <branch-name> → add a worktree at ../git-worktrees/<repo-name>-<branch-name>
 function gwt() {
   GIT_ROOT=$(git rev-parse --show-toplevel)
   REPO_NAME=$(basename "$GIT_ROOT")
   git worktree add "../git-worktrees/${REPO_NAME}-$1" -b "$1"
 }
 
-# gwtclean → マージ済みブランチの worktree を削除
+# gwtclean → drop the worktrees whose branch has already been merged
 function gwtclean() {
   local main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
   : ${main_branch:=main}
 
-  # マージ済みブランチを取得（main/develop を除く）
+  # Merged branches, with main and develop held back
   local merged_branches=$(git branch --merged "$main_branch" | grep -v '^\*' | grep -v -E '^\s*(main|develop)\s*$' | sed 's/^[[:space:]]*//')
 
   if [[ -z "$merged_branches" ]]; then
@@ -65,16 +62,13 @@ function gwtclean() {
     return 0
   fi
 
-  # 各 worktree をチェック
   git worktree list | while read -r line; do
     local wt_path=$(echo "$line" | awk '{print $1}')
     local wt_branch=$(echo "$line" | grep -oE '\[.+\]' | tr -d '[]')
 
-    # マージ済みブランチに該当するか確認
     if [[ -n "$wt_branch" ]] && echo "$merged_branches" | grep -qx "$wt_branch"; then
       echo "Removing merged worktree: $wt_path (branch: $wt_branch)"
       git worktree remove "$wt_path"
-      # ブランチも削除
       git branch -d "$wt_branch"
     fi
   done
@@ -82,15 +76,7 @@ function gwtclean() {
   echo "Cleanup complete."
 }
 
-# gsync → sync してからマージ済み worktree を削除し、現在のブランチを表示
+# gsync → sync, clear out merged worktrees, then show what branches are left
 function gsync() {
   git sync && gwtclean && git branch
 }
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

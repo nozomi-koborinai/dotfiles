@@ -96,13 +96,14 @@ link_file "$CONFIGS_DIR/wezterm" ~/.config/wezterm
 # hammerspoon
 link_file "$CONFIGS_DIR/hammerspoon" ~/.hammerspoon
 
-# cursor-agent
-if ! command -v cursor-agent &> /dev/null; then
-  echo "Installing cursor-agent..."
-  curl https://cursor.com/install -fsSL | bash
+# node for project work; fnm switches per project from .nvmrc / .node-version
+if command -v fnm &> /dev/null && ! fnm list | grep -q default; then
+  echo "Installing node 22 via fnm..."
+  fnm install 22
+  fnm default 22
 fi
 
-# vde-layout, pinned to Homebrew's node so switching nvm versions can't hide it
+# vde-layout, pinned to Homebrew's node so switching fnm versions can't hide it
 if command -v brew &> /dev/null; then
   BREW_PREFIX="$(brew --prefix)"
   stale_vde=$(command -v vde-layout 2>/dev/null || true)

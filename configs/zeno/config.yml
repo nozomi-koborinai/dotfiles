@@ -29,7 +29,7 @@ snippets:
     keyword: gwtr
     snippet: git worktree remove
 
-  # ccusage (Claude Code 使用量)
+  # ccusage (Claude Code usage)
   - name: ccusage
     keyword: ccu
     snippet: npx ccusage@latest
@@ -44,7 +44,7 @@ snippets:
     snippet: npx ccusage@latest blocks --live
 
 completions:
-  # cd: ディレクトリを fzf で検索して移動
+  # cd: pick a directory with fzf
   - name: chdir
     patterns:
       - "^cd $"
@@ -56,7 +56,7 @@ completions:
     callback: "cut -z -c 3-"
     callbackZero: true
 
-  # kill: プロセスを fzf で選んで停止
+  # kill: pick a process with fzf
   - name: kill pid
     patterns:
       - "^kill( .)* $"
