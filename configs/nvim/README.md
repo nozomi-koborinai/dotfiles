@@ -1,83 +1,76 @@
-# My NeoVim Config
+# Neovim Configuration
 
-WezTerm + NeoVim のシンプルな構成。
+Clean and fast configuration for Neovim + WezTerm.
 
-## プラグイン
+## Plugins
 
-| プラグイン | 用途 |
-|-----------|------|
-| tokyonight.nvim | カラースキーム |
-| snacks.nvim | ファイラー / ファインダー / ターミナル / LazyGit / ダッシュボード / インデント / 通知 |
-| nvim-treesitter | シンタックスハイライト |
-| gitsigns.nvim | バッファ内の Git 差分表示 |
-| bufferline.nvim | バッファタブ |
-| lualine.nvim | ステータスライン |
-| which-key.nvim | キーバインドヘルプ |
-| arto.vim | Markdown プレビュー (Arto) |
+| Plugin | Purpose |
+|--------|---------|
+| `tokyonight.nvim` | Color scheme |
+| `snacks.nvim` | Explorer / Picker / Terminal / LazyGit / Dashboard / Indent / Notifier |
+| `nvim-treesitter` | Syntax highlighting |
+| `gitsigns.nvim` | In-buffer Git diff & hunk actions |
+| `bufferline.nvim` | Buffer tabs |
+| `lualine.nvim` | Status line |
+| `which-key.nvim` | Keybinding hints |
 
-## キーマップ
+## Keymaps
 
-Leader キーは `Space`。
+Leader key is `<Space>`.
 
-### 基本操作
+### General
 
-| キー | 操作 |
-|------|------|
-| `<Space>w` | 保存 |
-| `<Space>x` | バッファを閉じる |
-| `<Space>X` | バッファを閉じる（変更を破棄） |
-| `<Space>wx` | 保存してバッファを閉じる |
-| `<Space>q` | 終了 |
-| `Shift+l` / `Shift+h` | 次/前のバッファ |
+| Key | Action |
+|-----|--------|
+| `<Space>w` | Save file |
+| `<Space>x` | Close buffer |
+| `<Space>X` | Force close buffer (discard changes) |
+| `<Space>wx` | Save and close buffer |
+| `<Space>q` | Quit Neovim |
+| `Shift+l` / `Shift+h` | Next / previous buffer |
 
-### ファイル操作
+### File Operations & Picker
 
-| キー | 操作 |
-|------|------|
-| `<Space>e` | ファイルエクスプローラの表示/非表示 |
-| `<Space>o` | 現在のファイルをエクスプローラで表示 |
-| `<Space>ff` | ファイル検索 |
-| `<Space>fg` | テキスト検索 (live grep) |
-| `<Space>fb` | バッファ一覧 |
-| `<Space>fs` | カーソル下の単語を検索 |
-| `<Space>fr` | 最近開いたファイル |
-| `<Space>fk` | キーマップ検索 |
+| Key | Action |
+|-----|--------|
+| `<Space>e` | Toggle file explorer |
+| `<Space>o` | Reveal current file in explorer |
+| `<Space>ff` | Find files |
+| `<Space>fg` | Live grep |
+| `<Space>fb` | Buffer list |
+| `<Space>fs` | Search word under cursor |
+| `<Space>fr` | Recent files |
+| `<Space>fk` | Search keymaps |
 
 ### Git
 
-| キー | 操作 |
-|------|------|
-| `<Space>gg` | LazyGit を起動 |
-| `<Space>gB` | 現在のファイルを GitHub で開く |
-| `]c` / `[c` | 次/前の変更箇所にジャンプ |
-| `<Space>hp` | 変更内容をプレビュー |
-| `<Space>hs` | ハンクをステージ |
-| `<Space>hr` | ハンクをリセット |
-| `<Space>hb` | blame 表示 |
-| `<Space>hd` | diff 表示 |
+| Key | Action |
+|-----|--------|
+| `<Space>gg` | Open LazyGit |
+| `<Space>gB` | Open file in GitHub |
+| `]c` / `[c` | Next / previous Git hunk |
+| `<Space>hp` | Preview hunk |
+| `<Space>hs` | Stage hunk |
+| `<Space>hr` | Reset hunk |
+| `<Space>hb` | Blame line |
+| `<Space>hd` | Diff this buffer |
 
-### ターミナル
+### Terminal
 
-| キー | 操作 |
-|------|------|
-| `<Space>t` | フローティングターミナルのトグル |
-| `Esc Esc` | ターミナルモードを抜ける |
+| Key | Action |
+|-----|--------|
+| `<Space>t` | Toggle floating terminal |
+| `<Esc><Esc>` | Exit terminal insert mode |
 
-### マークダウン
+### Miscellaneous
 
-| キー | 操作 |
-|------|------|
-| `<Space>mp` | Arto でプレビュー |
+| Key | Action |
+|-----|--------|
+| `<Space>un` | Notification history |
 
-### その他
+## Editor Settings
 
-| キー | 操作 |
-|------|------|
-| `<Space>un` | 通知履歴 |
-
-## エディタ設定
-
-- インデント: スペース 2
-- 行番号: 絶対 + 相対
-- クリップボード: システムと共有
-- 背景透過: WezTerm の透過設定に対応
+- Indent: 2 spaces
+- Line numbers: Hybrid (Absolute + Relative)
+- Clipboard: Shared with system
+- Background: Transparent (matches WezTerm opacity)

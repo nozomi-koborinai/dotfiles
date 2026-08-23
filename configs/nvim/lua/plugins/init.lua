@@ -53,16 +53,6 @@ return {
     },
   },
 
-  -- Markdown preview (Arto)
-  {
-    "arto-app/arto.vim",
-    cmd = { "Arto" },
-    ft = { "markdown" },
-    keys = {
-      { "<leader>mp", "<cmd>Arto<cr>", desc = "Markdown preview (Arto)" },
-    },
-  },
-
   -- Buffer line (tabs)
   {
     "akinsho/bufferline.nvim",
