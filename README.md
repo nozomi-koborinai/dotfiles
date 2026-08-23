@@ -1,82 +1,101 @@
 # dotfiles
 
-Personal macOS development environment and configuration files.
+An opinionated, reproducible development environment for macOS on Apple
+silicon. It combines terminal-first editing, AI-assisted development,
+declarative workspace layouts, and package management in one repository.
 
-## Setup
+## Core Toolchain
 
-Prerequisites: Xcode Command Line Tools + [Homebrew](https://brew.sh/).
+| Area | Tools | Role |
+|------|-------|------|
+| Terminal & shell | [WezTerm](https://wezterm.org/), [Zsh](https://www.zsh.org/), [Zeno](https://github.com/yuki-yano/zeno.zsh) | Terminal, shell integration, and abbreviations |
+| Editor | [Neovim](https://neovim.io/), [Cursor](https://www.cursor.com/) | Editing and IDE workflows |
+| AI development | [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex) | Coding agents, shared skills, and MCP servers |
+| Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
+| Runtimes | [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), Go, Rust, Dart/FVM | Language runtimes and SDKs |
+| Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
+| Cloud & IaC | Google Cloud CLI, Terraform, OPA | Cloud development and infrastructure tooling |
+| Git | GitHub CLI, [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
+
+See the [`Brewfile`](./Brewfile) for the complete package list.
+
+## Quick Start
+
+Prerequisites:
+
+- macOS on Apple silicon
+- Xcode Command Line Tools
+- [Homebrew](https://brew.sh/)
+
+> `setup.sh` replaces the configuration targets listed below with symlinks.
+> Review the repository before running it on an existing machine.
 
 ```bash
 git clone https://github.com/nozomi-koborinai/dotfiles.git ~/dotfiles
-brew bundle --file=~/dotfiles/Brewfile
-cd ~/dotfiles && ./setup.sh
+cd ~/dotfiles
+./setup.sh
 ```
 
-### Neovim Initial Setup
+The setup script installs missing Brewfile packages, links the managed
+configuration, installs Node.js 22 through fnm, and restores the Neovim plugin
+versions pinned in `lazy-lock.json`.
 
-Clear cache/state before first launch to cleanly install plugins:
+### Optional: Start Colima
 
 ```bash
-rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim
-nvim
+colima start --cpu 2 --memory 4 --disk 150
+dotfiles sync
 ```
 
-### Container Setup (Colima)
+After the VM has been created, use `colima start` and `colima stop` as needed.
 
-```bash
-colima start --cpu 2 --memory 4 --disk 150   # Create initial VM
-dotfiles sync                                  # Apply colima.yaml + configure docker context
-```
+## Daily Workflow
 
-Subsequent runs only need `colima start` / `colima stop`.
+| Command | What it does |
+|---------|--------------|
+| `dotfiles sync` | Pull changes, install missing dependencies, apply symlinks, and restore pinned Neovim plugins |
+| `dotfiles update` | Upgrade Homebrew packages, CLI extensions, Zeno, vde-layout, and Neovim plugins |
+| `dotfiles prune` | Uninstall Homebrew packages absent from the Brewfile and clean Neovim plugins |
 
----
+For Homebrew, `sync` reports packages that are installed locally but absent
+from the Brewfile; it does not uninstall them. Add a package to the Brewfile to
+keep it, or run `dotfiles prune` to remove it explicitly.
 
-## Daily Commands
+When `dotfiles update` changes `configs/nvim/lazy-lock.json`, commit that file
+so every machine receives the same plugin versions.
 
-```bash
-dotfiles sync      # Pull latest changes and apply symlinks
-dotfiles update    # Update all packages, CLI extensions, and tools
-dotfiles prune     # Uninstall packages not declared in the Brewfile
-```
+## Workspace Layouts
 
-`sync` only ever adds. When it finds Homebrew packages that this machine has but
-the `Brewfile` does not declare, it lists them and leaves them alone — declare
-them in the `Brewfile` to keep them, or run `prune` to remove them. Neovim
-plugins are an exception: they are fully declared in `configs/nvim`, so `sync`
-drops any that are no longer listed.
+Open the WezTerm Command Palette with `Cmd+P`:
 
-Launch workspaces via WezTerm Command Palette (`Cmd+P`):
-- **nzm: Dev** — nvim + Claude Code + Terminal x2
-- **nzm: Workspace** — nvim + Claude Code + Terminal (`~/dotfiles`)
+| Preset | Layout |
+|--------|--------|
+| **nzm: Dev** | Neovim + Claude Code + two terminals |
+| **nzm: Dev (Cursor)** | Cursor on the left; Claude Code + two terminals on the right |
+| **nzm: Workspace** | The Dev layout rooted at `~/dotfiles` |
+| **nzm: Workspace (Cursor)** | The Cursor layout rooted at `~/dotfiles` |
 
----
+The presets are declared in
+[`configs/vde/layout/config.yml`](./configs/vde/layout/config.yml).
 
 ## Keybindings
 
-### WezTerm
+<details>
+<summary><strong>WezTerm</strong> — leader: <code>Ctrl+Q</code></summary>
 
-Leader key: `Ctrl+Q`
-
-#### Workspace
+### Workspaces and tabs
 
 | Key | Action |
 |-----|--------|
 | `Leader → W` | Switch workspace |
 | `Leader → Shift+W` | Create workspace |
 | `Leader → $` | Rename workspace |
-
-#### Tabs
-
-| Key | Action |
-|-----|--------|
-| `Cmd+T` | New tab |
-| `Cmd+W` | Close tab |
+| `Cmd+T` / `Cmd+W` | Create / close tab |
 | `Ctrl+Tab` / `Ctrl+Shift+Tab` | Next / previous tab |
 | `Cmd+1-9` | Select tab 1-9 |
 | `Leader → {` / `}` | Move tab position |
 
-#### Panes
+### Panes
 
 | Key | Action |
 |-----|--------|
@@ -90,56 +109,60 @@ Leader key: `Ctrl+Q`
 | `Leader → 1-4` | Select pane by number |
 | `Leader → S` | Resize mode (`H/J/K/L` to adjust, `Enter`/`Esc` to exit) |
 
-#### QuickSelect & Copy
+### Selection and copy
 
 | Key | Action |
 |-----|--------|
-| `Leader → Space` | QuickSelect (copy URLs, hashes, etc. with a single key) |
-| `Leader → U` | Select URL and open in browser |
-| `Leader → E` | Emoji / NerdFont picker |
-| `Leader → [` | Copy mode (Vim keys) |
+| `Leader → Space` | QuickSelect URLs, hashes, and other detected text |
+| `Leader → U` | Select a URL and open it in a browser |
+| `Leader → E` | Emoji / Nerd Font picker |
+| `Leader → [` | Copy mode with Vim keys |
 | `Shift+↑/↓` | Jump between shell prompts |
 
-### Window Management (Hammerspoon)
+</details>
 
-Leader key: `Ctrl+A` (hides app if already focused)
+<details>
+<summary><strong>Hammerspoon</strong> — leader: <code>Ctrl+A</code></summary>
 
 | Key | Action |
 |-----|--------|
 | `Ctrl+A → Z` | Maximize window |
 | `Ctrl+A → H/J/K/L` | Focus the window in that direction |
 | `Ctrl+A → Shift+H/J/K/L` | Move the window to the display in that direction |
-| `Ctrl+A → 1/2/3` | Split the two frontmost windows left/right at 1:1, 2:1, 3:1 |
-| `Ctrl+A → B` | Google Chrome |
-| `Ctrl+A → Q` | WezTerm |
-| `Ctrl+A → S` | Cursor |
-| `Ctrl+A → E` | Ableton Live |
-| `Ctrl+A → G` | Grok Bot |
+| `Ctrl+A → 1/2/3` | Split the two frontmost windows at 1:1, 2:1, or 3:1 |
+| `Ctrl+A → B` | Toggle Google Chrome |
+| `Ctrl+A → Q` | Toggle WezTerm |
+| `Ctrl+A → S` | Toggle Cursor |
+| `Ctrl+A → E` | Toggle Ableton Live |
+| `Ctrl+A → G` | Toggle Grok Bot |
 | `Ctrl+A → Esc` | Cancel |
 
----
+</details>
 
 ## Repository Structure
 
-```
-configs/
-  zshrc          → ~/.zshrc
-  gitconfig      → ~/.gitconfig
-  gitignore      → ~/.config/git/ignore (Global ignore rules)
-  nvim/          → ~/.config/nvim
-  wezterm/       → ~/.config/wezterm
-  hammerspoon/   → ~/.hammerspoon (Window management)
-  gh/            → ~/.config/gh
-  zeno/          → ~/.config/zeno (Shell abbreviations)
-  lazygit/       → ~/Library/Application Support/lazygit
-  vde/           → ~/.config/vde (Workspace layouts)
-  docker/        → ~/.docker (Merged JSON configuration)
-  colima/        → ~/.colima/default (Colima VM configuration)
-  skills/        → ~/.claude/skills/ & ~/.cursor/skills/ (Shared Agent Skills)
-  claude/        → ~/.claude (MCP servers & base settings)
-  cursor/        → ~/.cursor/mcp.json (Cursor MCP settings)
-  dotctor/       → ~/.dotctor.toml (Health check configuration)
-bin/
-  dotfiles       → dotfiles sync / update / prune CLI
-lib.sh           → Shell helpers shared by setup.sh and bin/dotfiles
+```text
+.
+├── Brewfile              # Homebrew packages, casks, and taps
+├── setup.sh              # Initial setup and configuration linking
+├── lib.sh                # Shared setup and maintenance helpers
+├── bin/
+│   ├── dotfiles          # sync / update / prune command
+│   └── nzm-cursor-split  # Cursor + WezTerm split launcher
+└── configs/
+    ├── claude/           # Claude Code MCP and base settings
+    ├── colima/           # Colima VM configuration
+    ├── cursor/           # Cursor MCP configuration
+    ├── docker/           # Docker CLI configuration
+    ├── dotctor/          # Dotfiles health checks
+    ├── gh/               # GitHub CLI
+    ├── hammerspoon/      # macOS window management
+    ├── nvim/             # Neovim configuration and plugin lockfile
+    ├── skills/           # Shared Claude Code and Cursor skills
+    ├── vde/              # WezTerm workspace layouts
+    ├── wezterm/          # Terminal configuration and keybindings
+    ├── zeno/             # Shell abbreviations and completions
+    ├── gitconfig         # ~/.gitconfig
+    ├── gitignore         # ~/.config/git/ignore
+    └── zshrc             # ~/.zshrc
 ```
