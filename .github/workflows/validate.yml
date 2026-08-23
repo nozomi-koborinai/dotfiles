@@ -42,7 +42,7 @@ jobs:
       - name: Validate configuration and documentation
         run: |
           deno fmt --check deno.json scripts/validate.ts
-          deno check scripts/validate.ts
+          deno check --frozen scripts/validate.ts
           deno task validate
 
       - name: Check Lua formatting

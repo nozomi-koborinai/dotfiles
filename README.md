@@ -180,6 +180,7 @@ The presets are declared in
 ├── CLAUDE.md             # Claude Code adapter that imports AGENTS.md
 ├── Brewfile              # Homebrew packages, casks, and taps
 ├── deno.json             # Validation task and pinned parser imports
+├── deno.lock             # Exact validation dependency graph
 ├── README.md             # Human-facing setup and usage guide
 ├── setup.sh              # Initial setup and configuration linking
 ├── lib.sh                # Shared setup and maintenance helpers
