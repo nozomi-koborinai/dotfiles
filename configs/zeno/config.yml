@@ -1,19 +1,11 @@
 snippets:
-  # Python
-  - name: python3
-    keyword: python
-    snippet: python3
-  - name: pip3
-    keyword: pip
-    snippet: pip3
-
   # Repo
   - name: repo cd
     keyword: rcd
     snippet: cd $(find ~/StudioProjects -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
   - name: repo clone
     keyword: rcl
-    snippet: git -C $([ -d ~/StudioProjects ] && echo ~/StudioProjects || echo ~/vs-code-projects) clone
+    snippet: git -C ~/StudioProjects clone
 
   # Git
   - name: git
