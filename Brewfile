@@ -7,7 +7,6 @@ brew "bash-completion"
 brew "zstd"
 brew "openjdk"
 brew "cloud-sql-proxy"
-brew "cocoapods", link: false
 brew "codex"
 brew "dart-sdk"
 brew "deno"
