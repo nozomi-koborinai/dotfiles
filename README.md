@@ -9,13 +9,13 @@ declarative workspace layouts, and package management in one repository.
 | Area | Tools | Role |
 |------|-------|------|
 | Terminal & shell | [WezTerm](https://wezterm.org/), [Zsh](https://www.zsh.org/), [Zeno](https://github.com/yuki-yano/zeno.zsh) | Terminal, shell integration, and abbreviations |
-| Editor | [Neovim](https://neovim.io/), [Cursor](https://www.cursor.com/) | Editing and IDE workflows |
-| AI development | [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex) | Coding agents, shared skills, and MCP servers |
+| Editor | [Neovim](https://neovim.io/) | Terminal-first editing |
 | Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
-| Runtimes | [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), Go, Rust, Dart/FVM | Language runtimes and SDKs |
+| Runtimes | [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
 | Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
-| Cloud & IaC | Google Cloud CLI, Terraform, OPA | Cloud development and infrastructure tooling |
-| Git | GitHub CLI, [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
+| Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [OPA](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
+| Git | [Git](https://git-scm.com/), [GitHub CLI](https://cli.github.com/), [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
+| AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex) | IDE and coding agents, shared skills, and MCP servers |
 
 See the [`Brewfile`](./Brewfile) for the complete package list.
 
