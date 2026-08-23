@@ -21,6 +21,10 @@ if command -v brew &> /dev/null; then
 
   if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="$DOTFILES_DIR/Brewfile" &> /dev/null; then
     echo "Installing missing Brewfile packages..."
+    # A formula added to a tap since this machine last updated would otherwise
+    # look like it does not exist, and one unknown name aborts the whole install.
+    brew update --quiet || true
+    trust_declared_taps
     HOMEBREW_BUNDLE_NO_UPGRADE=1 brew bundle install --file="$DOTFILES_DIR/Brewfile" || echo "  brew bundle: partially failed (check log above)"
   fi
   echo "✓ Brewfile"
