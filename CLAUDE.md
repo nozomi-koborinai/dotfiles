@@ -34,10 +34,13 @@ Personal development environment and dotfiles managed for macOS.
 
 - File and directory names are lowercase (except tool conventions like `Brewfile`).
 - Only items under `configs/` and `bin/` are managed by `setup.sh`.
+- Shell helpers used by both `setup.sh` and `bin/dotfiles` live in `lib.sh`.
+- Anything kept on a machine must be declared in the repository. `dotfiles sync` reports undeclared Homebrew packages but never uninstalls; `dotfiles prune` performs the removal.
 - Claude Code settings are managed in two layers: reproducible configurations (`env`, `permissions.allow`, `hooks`, `enabledPlugins`, `extraKnownMarketplaces`, `language`) reside in `configs/claude/settings-base.json`. Machine-local preferences (`model`, `theme`, `effortLevel`, `tui`) stay in `~/.claude/settings.json` and are preserved across syncs.
 
 ## Commands
 
 - `dotfiles sync` — Pull latest changes and run `setup.sh`
 - `dotfiles update` — Update all managed tools, Homebrew packages, and CLI extensions
+- `dotfiles prune` — Uninstall Homebrew packages not declared in the `Brewfile`
 - WezTerm Command Palette (`Cmd+P`) → `nzm: Dev` / `nzm: Workspace` to launch workspaces

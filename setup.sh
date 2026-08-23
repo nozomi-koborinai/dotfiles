@@ -7,6 +7,8 @@ set -e
 DOTFILES_DIR="$HOME/dotfiles"
 CONFIGS_DIR="$DOTFILES_DIR/configs"
 
+source "$DOTFILES_DIR/lib.sh"
+
 echo "Setting up dotfiles..."
 
 # Ensure config directories exist
@@ -15,15 +17,23 @@ mkdir -p ~/.config/gh
 
 # Install Brewfile dependencies
 if command -v brew &> /dev/null; then
-  # Trust declared taps (Homebrew 6 tap-trust)
-  grep -E '^tap ' "$DOTFILES_DIR/Brewfile" | sed -E 's/^tap "([^"]+)".*/\1/' | while IFS= read -r tap_name; do
-    brew trust "$tap_name" &> /dev/null || true
-  done
+  trust_declared_taps
+
   if ! HOMEBREW_BUNDLE_NO_UPGRADE=1 HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="$DOTFILES_DIR/Brewfile" &> /dev/null; then
     echo "Installing missing Brewfile packages..."
     HOMEBREW_BUNDLE_NO_UPGRADE=1 brew bundle install --file="$DOTFILES_DIR/Brewfile" || echo "  brew bundle: partially failed (check log above)"
   fi
   echo "✓ Brewfile"
+
+  # Reported, never removed here: a routine sync must not uninstall anything.
+  undeclared=$(undeclared_brew_packages)
+  if [ -n "$undeclared" ]; then
+    echo ""
+    echo "  Undeclared packages (installed but missing from the Brewfile):"
+    echo "$undeclared" | sed 's/^/    /'
+    echo "    Add them to the Brewfile, or run 'dotfiles prune' to uninstall them."
+    echo ""
+  fi
 fi
 
 # Function to link files / directories
@@ -72,6 +82,7 @@ link_file "$CONFIGS_DIR/zeno/config.yml" ~/.config/zeno/config.yml
 
 # nvim
 link_file "$CONFIGS_DIR/nvim" ~/.config/nvim
+clean_nvim_plugins
 
 # wezterm
 link_file "$CONFIGS_DIR/wezterm" ~/.config/wezterm
@@ -85,10 +96,18 @@ if ! command -v cursor-agent &> /dev/null; then
   curl https://cursor.com/install -fsSL | bash
 fi
 
-# vde-layout
-if ! command -v vde-layout &> /dev/null; then
-  echo "Installing vde-layout..."
-  npm install -g vde-layout
+# vde-layout, pinned to Homebrew's node so switching nvm versions can't hide it
+if command -v brew &> /dev/null; then
+  BREW_PREFIX="$(brew --prefix)"
+  stale_vde=$(command -v vde-layout 2>/dev/null || true)
+  if [ -n "$stale_vde" ] && [ "$stale_vde" != "$BREW_PREFIX/bin/vde-layout" ]; then
+    npm uninstall -g vde-layout &> /dev/null || true
+    echo "  removed vde-layout from $(dirname "$stale_vde")"
+  fi
+  if [ ! -x "$BREW_PREFIX/bin/vde-layout" ] && [ -x "$BREW_PREFIX/bin/npm" ]; then
+    echo "Installing vde-layout..."
+    "$BREW_PREFIX/bin/npm" install -g vde-layout
+  fi
 fi
 mkdir -p ~/.config/vde/layout
 link_file "$CONFIGS_DIR/vde/layout/config.yml" ~/.config/vde/layout/config.yml
@@ -96,11 +115,7 @@ link_file "$CONFIGS_DIR/vde/layout/config.yml" ~/.config/vde/layout/config.yml
 # lazygit
 link_file "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
 
-# dotctor
-if command -v cargo &> /dev/null; then
-  cargo install --git https://github.com/nozomi-koborinai/dotctor 2>/dev/null
-  echo "✓ dotctor"
-fi
+# dotctor (the binary itself comes from the Brewfile)
 link_file "$CONFIGS_DIR/dotctor/dotctor.toml" ~/.dotctor.toml
 
 # docker config (merge base settings into existing config)

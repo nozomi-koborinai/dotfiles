@@ -41,7 +41,14 @@ Manual import: `Settings → Advanced → Import` → `configs/raycast/Raycast.r
 ```bash
 dotfiles sync      # Pull latest changes and apply symlinks
 dotfiles update    # Update all packages, CLI extensions, and tools
+dotfiles prune     # Uninstall packages not declared in the Brewfile
 ```
+
+`sync` only ever adds. When it finds Homebrew packages that this machine has but
+the `Brewfile` does not declare, it lists them and leaves them alone — declare
+them in the `Brewfile` to keep them, or run `prune` to remove them. Neovim
+plugins are an exception: they are fully declared in `configs/nvim`, so `sync`
+drops any that are no longer listed.
 
 Launch workspaces via WezTerm Command Palette (`Cmd+P`):
 - **nzm: Dev** — nvim + Claude Code + Terminal x2
@@ -157,5 +164,6 @@ configs/
   dotctor/       → ~/.dotctor.toml (Health check configuration)
   raycast/       → Manual import
 bin/
-  dotfiles       → dotfiles sync / update CLI
+  dotfiles       → dotfiles sync / update / prune CLI
+lib.sh           → Shell helpers shared by setup.sh and bin/dotfiles
 ```

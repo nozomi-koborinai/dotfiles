@@ -4,6 +4,8 @@ set -e
 
 DOTFILES_DIR="$HOME/dotfiles"
 
+source "$DOTFILES_DIR/lib.sh"
+
 case "${1:-}" in
   sync)
     echo "Syncing dotfiles..."
@@ -49,16 +51,21 @@ case "${1:-}" in
       npm update -g vde-layout
     fi
 
-    # dotctor
-    if command -v cargo &> /dev/null; then
-      echo ""
-      echo "==> dotctor"
-      cargo install --git https://github.com/nozomi-koborinai/dotctor 2>/dev/null
-      echo "✓ dotctor"
-    fi
-
     echo ""
     echo "Update complete!"
+    ;;
+  prune)
+    echo "Removing packages this machine has but the Brewfile does not declare..."
+
+    if command -v brew &> /dev/null; then
+      trust_declared_taps
+      brew bundle cleanup --file="$DOTFILES_DIR/Brewfile" --force
+    fi
+
+    clean_nvim_plugins
+
+    echo ""
+    echo "Done!"
     ;;
   *)
     echo "Usage: dotfiles <command>"
@@ -66,5 +73,6 @@ case "${1:-}" in
     echo "Commands:"
     echo "  sync      Pull latest and apply symlinks"
     echo "  update    Update all managed tools"
+    echo "  prune     Uninstall packages not declared in the Brewfile"
     ;;
 esac

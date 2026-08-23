@@ -6,7 +6,11 @@ Clean and fast configuration for Neovim + WezTerm.
 
 | Plugin | Purpose |
 |--------|---------|
-| `tokyonight.nvim` | Color scheme |
+| `gruvbox-material` | Color scheme |
+| `markview.nvim` | In-editor Markdown rendering |
+| `dropbar.nvim` | Breadcrumb bar |
+| `nvim-autopairs` | Auto-close brackets |
+| `accelerated-jk.nvim` | Accelerated `j` / `k` motion |
 | `snacks.nvim` | Explorer / Picker / Terminal / LazyGit / Dashboard / Indent / Notifier |
 | `nvim-treesitter` | Syntax highlighting |
 | `gitsigns.nvim` | In-buffer Git diff & hunk actions |
