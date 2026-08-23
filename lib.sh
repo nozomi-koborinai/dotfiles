@@ -20,9 +20,11 @@ undeclared_brew_packages() {
     | awk '/^Would uninstall/{p=1} /^Would `brew cleanup`/{p=0} /^Run /{p=0} p'
 }
 
-# Drop nvim plugins that are no longer declared in configs/nvim.
-clean_nvim_plugins() {
-  if command -v nvim &> /dev/null && [ -d "$HOME/.local/share/nvim/lazy" ]; then
+# Bring nvim plugins in line with configs/nvim: the versions pinned in
+# lazy-lock.json, minus anything the config no longer declares.
+sync_nvim_plugins() {
+  if command -v nvim &> /dev/null; then
+    nvim --headless "+Lazy! restore" +qa &> /dev/null || true
     nvim --headless "+Lazy! clean" +qa &> /dev/null || true
     echo "✓ nvim plugins"
   fi

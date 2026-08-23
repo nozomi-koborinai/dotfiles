@@ -58,6 +58,8 @@ link_file "$CONFIGS_DIR/zshrc" ~/.zshrc
 
 # git
 link_file "$CONFIGS_DIR/gitconfig" ~/.gitconfig
+mkdir -p ~/.config/git
+link_file "$CONFIGS_DIR/gitignore" ~/.config/git/ignore
 
 # gh (GitHub CLI)
 link_file "$CONFIGS_DIR/gh/config.yml" ~/.config/gh/config.yml
@@ -86,7 +88,7 @@ link_file "$CONFIGS_DIR/zeno/config.yml" ~/.config/zeno/config.yml
 
 # nvim
 link_file "$CONFIGS_DIR/nvim" ~/.config/nvim
-clean_nvim_plugins
+sync_nvim_plugins
 
 # wezterm
 link_file "$CONFIGS_DIR/wezterm" ~/.config/wezterm

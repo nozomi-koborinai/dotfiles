@@ -129,6 +129,7 @@ Leader key: `Ctrl+A` (hides app if already focused)
 configs/
   zshrc          → ~/.zshrc
   gitconfig      → ~/.gitconfig
+  gitignore      → ~/.config/git/ignore (Global ignore rules)
   nvim/          → ~/.config/nvim
   wezterm/       → ~/.config/wezterm
   hammerspoon/   → ~/.hammerspoon (Window management)

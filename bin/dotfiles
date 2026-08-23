@@ -51,6 +51,18 @@ case "${1:-}" in
       npm update -g vde-layout
     fi
 
+    # nvim plugins
+    if command -v nvim &> /dev/null; then
+      echo ""
+      echo "==> nvim plugins"
+      nvim --headless "+Lazy! update" +qa &> /dev/null || true
+      if git -C "$DOTFILES_DIR" diff --quiet -- configs/nvim/lazy-lock.json; then
+        echo "  already pinned to the latest versions"
+      else
+        echo "  lazy-lock.json changed — commit it so other machines get the same versions"
+      fi
+    fi
+
     echo ""
     echo "Update complete!"
     ;;
@@ -62,7 +74,7 @@ case "${1:-}" in
       brew bundle cleanup --file="$DOTFILES_DIR/Brewfile" --force
     fi
 
-    clean_nvim_plugins
+    sync_nvim_plugins
 
     echo ""
     echo "Done!"

@@ -1,0 +1,3 @@
+# Global ignore rules, read by git from ~/.config/git/ignore.
+# Claude Code writes machine-local approvals here; they belong to no repository.
+**/.claude/settings.local.json

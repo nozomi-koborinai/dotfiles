@@ -13,6 +13,7 @@ Personal development environment and dotfiles managed for macOS.
 |-----------|---------|-------------------|
 | `configs/zshrc` | Zsh configuration | → `~/.zshrc` |
 | `configs/gitconfig` | Git configuration | → `~/.gitconfig` |
+| `configs/gitignore` | Global Git ignore rules | → `~/.config/git/ignore` |
 | `configs/nvim/` | Neovim configuration | → `~/.config/nvim` |
 | `configs/wezterm/` | WezTerm configuration | → `~/.config/wezterm` |
 | `configs/hammerspoon/` | Hammerspoon configuration (window management) | → `~/.hammerspoon` |
