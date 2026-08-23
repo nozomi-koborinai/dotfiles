@@ -18,7 +18,8 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # Node version manager. --use-on-cd picks up .nvmrc / .node-version per project.
-eval "$(fnm env --use-on-cd --shell zsh)"
+# Guarded so a machine that has not run setup.sh yet still gets a working shell.
+command -v fnm > /dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
