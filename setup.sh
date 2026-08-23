@@ -4,7 +4,7 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIGS_DIR="$DOTFILES_DIR/configs"
 
 source "$DOTFILES_DIR/lib.sh"

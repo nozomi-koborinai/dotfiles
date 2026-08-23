@@ -8,9 +8,7 @@ wezterm.on("update-right-status", function(window, pane)
     status = "LEADER"
   else
     local name = window:active_key_table()
-    if name then
-      status = "TABLE: " .. name
-    end
+    if name then status = "TABLE: " .. name end
   end
   window:set_right_status(status)
 end)
@@ -30,9 +28,7 @@ return {
       action = act.PromptInputLine({
         description = "(wezterm) Set workspace title:",
         action = wezterm.action_callback(function(win, pane, line)
-          if line then
-            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-          end
+          if line then wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line) end
         end),
       }),
     },

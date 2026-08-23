@@ -18,9 +18,21 @@ return {
     build = ":TSUpdate",
     opts = {
       ensure_installed = {
-        "bash", "dart", "dockerfile", "go", "hcl", "html",
-        "javascript", "json", "lua", "markdown", "markdown_inline",
-        "python", "tsx", "typescript", "yaml",
+        "bash",
+        "dart",
+        "dockerfile",
+        "go",
+        "hcl",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "tsx",
+        "typescript",
+        "yaml",
       },
     },
   },
@@ -31,17 +43,15 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
-        add          = { text = "│" },
-        change       = { text = "│" },
-        delete       = { text = "_" },
-        topdelete    = { text = "‾" },
+        add = { text = "│" },
+        change = { text = "│" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
         changedelete = { text = "~" },
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-        local map = function(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
-        end
+        local map = function(mode, l, r, desc) vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc }) end
         map("n", "]c", function() gs.nav_hunk("next") end, "Next hunk")
         map("n", "[c", function() gs.nav_hunk("prev") end, "Prev hunk")
         map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
@@ -183,8 +193,8 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile    = { enabled = true },
-      dashboard  = {
+      bigfile = { enabled = true },
+      dashboard = {
         preset = {
           header = [[
                         _
@@ -205,31 +215,31 @@ return {
           { section = "startup" },
         },
       },
-      image      = { enabled = false },
-      gitbrowse  = { enabled = true },
-      indent     = { enabled = true },
-      input      = { enabled = true },
-      lazygit    = { enabled = true },
-      notifier   = { enabled = true },
-      picker     = { enabled = true },
-      quickfile  = { enabled = true },
-      scope      = { enabled = true },
-      scroll     = { enabled = true },
-      words      = { enabled = true },
+      image = { enabled = false },
+      gitbrowse = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      lazygit = { enabled = true },
+      notifier = { enabled = true },
+      picker = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      words = { enabled = true },
     },
     keys = {
       -- Picker
-      { "<leader>ff", function() Snacks.picker.files() end,     desc = "Find files" },
-      { "<leader>fg", function() Snacks.picker.grep() end,      desc = "Live grep" },
-      { "<leader>fb", function() Snacks.picker.buffers() end,   desc = "Buffers" },
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find files" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Live grep" },
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fs", function() Snacks.picker.grep_word() end, desc = "Grep word under cursor" },
-      { "<leader>fr", function() Snacks.picker.recent() end,    desc = "Recent files" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent files" },
       -- Terminal
-      { "<leader>t",  function() Snacks.terminal.toggle() end, desc = "Toggle terminal" },
-      { "<Esc><Esc>", "<C-\\><C-n>", mode = "t",              desc = "Exit terminal mode" },
+      { "<leader>t", function() Snacks.terminal.toggle() end, desc = "Toggle terminal" },
+      { "<Esc><Esc>", "<C-\\><C-n>", mode = "t", desc = "Exit terminal mode" },
       -- Git
-      { "<leader>gg", function() Snacks.lazygit() end,    desc = "LazyGit" },
-      { "<leader>gB", function() Snacks.gitbrowse() end,  desc = "Open in browser" },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "LazyGit" },
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Open in browser" },
       -- Notification
       { "<leader>un", function() Snacks.notifier.show_history() end, desc = "Notification history" },
       -- Keymaps

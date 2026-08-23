@@ -42,7 +42,5 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.defer_fn(set_transparent_bg, 10)
-  end,
+  callback = function() vim.defer_fn(set_transparent_bg, 10) end,
 })

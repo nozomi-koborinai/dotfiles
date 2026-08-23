@@ -25,10 +25,7 @@ end
 -- バンドル名とプロセス名が違うアプリ向け）
 local function toggleApp(appName, bundleID)
   local app = hs.application.frontmostApplication()
-  local focused = app and (
-    (bundleID and app:bundleID() == bundleID) or
-    (not bundleID and app:name() == appName)
-  )
+  local focused = app and ((bundleID and app:bundleID() == bundleID) or (not bundleID and app:name() == appName))
   if focused then
     app:hide()
   else
@@ -37,9 +34,7 @@ local function toggleApp(appName, bundleID)
     else
       hs.application.launchOrFocus(appName)
     end
-    hs.timer.doAfter(0.2, function()
-      centerMouse(hs.window.focusedWindow())
-    end)
+    hs.timer.doAfter(0.2, function() centerMouse(hs.window.focusedWindow()) end)
   end
   leader:exit()
 end
@@ -118,15 +113,19 @@ local function splitWindows(leftRatio)
   local f = screen:frame()
 
   focused:setFrame({
-    x = f.x, y = f.y,
-    w = f.w * leftRatio, h = f.h,
+    x = f.x,
+    y = f.y,
+    w = f.w * leftRatio,
+    h = f.h,
   })
 
   for i = 2, #wins do
     if wins[i]:screen() == screen then
       wins[i]:setFrame({
-        x = f.x + f.w * leftRatio, y = f.y,
-        w = f.w * (1 - leftRatio), h = f.h,
+        x = f.x + f.w * leftRatio,
+        y = f.y,
+        w = f.w * (1 - leftRatio),
+        h = f.h,
       })
       break
     end
@@ -137,9 +136,9 @@ local function splitWindows(leftRatio)
 end
 
 -- 数字 = 左側の比重 (1:1, 2:1, 3:1)
-leader:bind("", "1", function() splitWindows(1/2) end)
-leader:bind("", "2", function() splitWindows(2/3) end)
-leader:bind("", "3", function() splitWindows(3/4) end)
+leader:bind("", "1", function() splitWindows(1 / 2) end)
+leader:bind("", "2", function() splitWindows(2 / 3) end)
+leader:bind("", "3", function() splitWindows(3 / 4) end)
 
 -- Esc: cancel
 leader:bind("", "escape", function() leader:exit() end)
@@ -152,9 +151,7 @@ leader:bind("", "escape", function() leader:exit() end)
 local function cursorSplitFrames(screen)
   local f = screen:frame()
   local leftWidth = f.w * 0.65
-  return
-    { x = f.x, y = f.y, w = leftWidth, h = f.h },
-    { x = f.x + leftWidth, y = f.y, w = f.w - leftWidth, h = f.h }
+  return { x = f.x, y = f.y, w = leftWidth, h = f.h }, { x = f.x + leftWidth, y = f.y, w = f.w - leftWidth, h = f.h }
 end
 
 local function getCursorWindowIds()

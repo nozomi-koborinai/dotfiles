@@ -2,7 +2,7 @@
 
 set -e
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 source "$DOTFILES_DIR/lib.sh"
 
@@ -10,7 +10,9 @@ case "${1:-}" in
   sync)
     echo "Syncing dotfiles..."
     cd "$DOTFILES_DIR"
-    git pull --rebase
+    # Syncing right after editing a config is the normal case, so keep local
+    # work in place instead of refusing to pull.
+    git pull --rebase --autostash
     bash setup.sh
     echo ""
     echo "Done!"
@@ -39,10 +41,12 @@ case "${1:-}" in
       git -C "$HOME/.zeno" pull
     fi
 
-    # cursor-agent
-    echo ""
-    echo "==> cursor-agent"
-    curl https://cursor.com/install -fsSL | bash
+    # cursor-agent (setup.sh handles the first install)
+    if command -v cursor-agent &> /dev/null; then
+      echo ""
+      echo "==> cursor-agent"
+      curl https://cursor.com/install -fsSL | bash
+    fi
 
     # vde-layout
     if command -v npm &> /dev/null; then
