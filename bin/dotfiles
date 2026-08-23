@@ -1,0 +1,70 @@
+#!/bin/bash
+
+set -e
+
+DOTFILES_DIR="$HOME/dotfiles"
+
+case "${1:-}" in
+  sync)
+    echo "Syncing dotfiles..."
+    cd "$DOTFILES_DIR"
+    git pull --rebase
+    bash setup.sh
+    echo ""
+    echo "Done!"
+    ;;
+  update)
+    echo "Updating tools..."
+
+    # Homebrew
+    if command -v brew &> /dev/null; then
+      echo ""
+      echo "==> Homebrew"
+      brew update && brew upgrade && brew upgrade --greedy
+    fi
+
+    # gh extensions
+    if command -v gh &> /dev/null; then
+      echo ""
+      echo "==> gh extensions"
+      gh extension upgrade --all
+    fi
+
+    # zeno.zsh
+    if [ -d "$HOME/.zeno" ]; then
+      echo ""
+      echo "==> zeno.zsh"
+      git -C "$HOME/.zeno" pull
+    fi
+
+    # cursor-agent
+    echo ""
+    echo "==> cursor-agent"
+    curl https://cursor.com/install -fsSL | bash
+
+    # vde-layout
+    if command -v npm &> /dev/null; then
+      echo ""
+      echo "==> vde-layout"
+      npm update -g vde-layout
+    fi
+
+    # dotctor
+    if command -v cargo &> /dev/null; then
+      echo ""
+      echo "==> dotctor"
+      cargo install --git https://github.com/nozomi-koborinai/dotctor 2>/dev/null
+      echo "✓ dotctor"
+    fi
+
+    echo ""
+    echo "Update complete!"
+    ;;
+  *)
+    echo "Usage: dotfiles <command>"
+    echo ""
+    echo "Commands:"
+    echo "  sync      Pull latest and apply symlinks"
+    echo "  update    Update all managed tools"
+    ;;
+esac

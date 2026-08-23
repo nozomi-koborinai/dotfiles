@@ -1,0 +1,80 @@
+presets:
+  dev:
+    name: "nzm: Dev"
+    description: "nvim + Claude Code + Terminal x2"
+    backend: wezterm
+    layout:
+      type: horizontal
+      ratio: [1, 1]
+      panes:
+        - type: vertical
+          ratio: [85, 15]
+          panes:
+            - name: editor
+              command: nvim
+            - type: horizontal
+              ratio: [1, 1]
+              panes:
+                - name: term1
+                - name: term2
+        - name: claude
+          command: claude
+          focus: true
+
+  dev-cursor:
+    name: "nzm: Dev (Cursor + Claude + Term split)"
+    description: "Cursor.app (left 70%) + Claude Code + Terminal x2 (right 30%)"
+    backend: wezterm
+    layout:
+      type: vertical
+      ratio: [80, 20]
+      panes:
+        - name: claude
+          command: claude
+          focus: true
+        - type: horizontal
+          ratio: [1, 1]
+          panes:
+            - name: term1
+            - name: term2
+
+  ws:
+    name: "nzm: Workspace"
+    description: "nvim + Claude Code + Terminal (~/dotfiles)"
+    backend: wezterm
+    layout:
+      type: horizontal
+      ratio: [1, 1]
+      panes:
+        - type: vertical
+          ratio: [85, 15]
+          panes:
+            - name: editor
+              command: nvim
+              cwd: "~/dotfiles"
+            - name: terminal
+              cwd: "~/dotfiles"
+        - name: claude
+          command: claude
+          cwd: "~/dotfiles"
+          focus: true
+
+  ws-cursor:
+    name: "nzm: Workspace (Cursor + Claude + Term split)"
+    description: "Cursor.app (left 70%) + Claude Code + Terminal x2 (right 30%, ~/dotfiles)"
+    backend: wezterm
+    layout:
+      type: vertical
+      ratio: [80, 20]
+      panes:
+        - name: claude
+          command: claude
+          cwd: "~/dotfiles"
+          focus: true
+        - type: horizontal
+          ratio: [1, 1]
+          panes:
+            - name: term1
+              cwd: "~/dotfiles"
+            - name: term2
+              cwd: "~/dotfiles"

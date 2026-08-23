@@ -1,0 +1,11 @@
+cpu: 2
+disk: 150
+memory: 4
+arch: aarch64
+runtime: docker
+vmType: vz
+mountType: virtiofs
+mountInotify: true
+binfmt: true
+autoActivate: true
+sshConfig: true

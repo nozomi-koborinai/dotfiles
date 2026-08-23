@@ -1,0 +1,17 @@
+[user]
+	name = nozomi-koborinai
+	email = kobofender@gmail.com
+[http]
+	postBuffer = 524288000
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[alias]
+	sync = "!f() { git remote set-head origin --auto 2>/dev/null; default=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'); : ${default:=main}; git checkout \"$default\" && git pull --prune && git branch --merged \"$default\" | grep -vE '(main|develop)' | xargs git branch -d 2>/dev/null; git branch -vv | grep ': gone]' | awk '{print $1}' | grep -vE '(main|develop)' | xargs git branch -D 2>/dev/null; true; }; f"
+[rerere]
+	enabled = true
+[remote]
+	pushDefault = origin

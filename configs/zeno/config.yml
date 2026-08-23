@@ -1,0 +1,80 @@
+snippets:
+  # Python
+  - name: python3
+    keyword: python
+    snippet: python3
+  - name: pip3
+    keyword: pip
+    snippet: pip3
+
+  # Repo
+  - name: repo cd
+    keyword: rcd
+    snippet: cd $(find ~/StudioProjects ~/vs-code-projects -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
+  - name: repo clone
+    keyword: rcl
+    snippet: git -C $([ -d ~/StudioProjects ] && echo ~/StudioProjects || echo ~/vs-code-projects) clone
+
+  # Git
+  - name: git
+    keyword: g
+    snippet: git
+  - name: git branch
+    keyword: gb
+    snippet: git branch
+  - name: git worktree list
+    keyword: gwtl
+    snippet: git worktree list
+  - name: git worktree remove
+    keyword: gwtr
+    snippet: git worktree remove
+
+  # Splitview (mo / difit + WezTerm 左右分割)
+  - name: splitview mo
+    keyword: svm
+    snippet: splitview mo
+  - name: splitview difit
+    keyword: svd
+    snippet: splitview difit
+  - name: splitview exit
+    keyword: svx
+    snippet: splitview-exit
+
+  # ccusage (Claude Code 使用量)
+  - name: ccusage
+    keyword: ccu
+    snippet: npx ccusage@latest
+  - name: ccusage daily
+    keyword: ccud
+    snippet: npx ccusage@latest daily
+  - name: ccusage monthly
+    keyword: ccum
+    snippet: npx ccusage@latest monthly
+  - name: ccusage blocks live
+    keyword: ccub
+    snippet: npx ccusage@latest blocks --live
+
+completions:
+  # cd: ディレクトリを fzf で検索して移動
+  - name: chdir
+    patterns:
+      - "^cd $"
+    sourceCommand: "find . -maxdepth 5 -path '*/.git' -prune -o -type d -print0 2>/dev/null"
+    options:
+      --read0: true
+      --prompt: "'Dir> '"
+      --preview: "ls -la {}"
+    callback: "cut -z -c 3-"
+    callbackZero: true
+
+  # kill: プロセスを fzf で選んで停止
+  - name: kill pid
+    patterns:
+      - "^kill( .)* $"
+    excludePatterns:
+      - " -[lns] $"
+    sourceCommand: "LANG=C ps -ef | sed 1d"
+    options:
+      --multi: true
+      --prompt: "'Kill Process> '"
+    callback: "awk '{print $2}'"

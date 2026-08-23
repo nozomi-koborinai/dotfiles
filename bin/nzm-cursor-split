@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# nzm-cursor-split: Places Cursor.app on the left (70%) and WezTerm on the right (30%),
+# configuring Claude Code + 2 terminal panes on the WezTerm side.
+# Usage:
+#   nzm-cursor-split dev   # Current working directory
+#   nzm-cursor-split ws    # ~/dotfiles working directory
+
+set -e
+
+mode="${1:-}"
+
+case "$mode" in
+  dev)
+    preset="dev-cursor"
+    cursor_args=()
+    ;;
+  ws)
+    preset="ws-cursor"
+    cursor_args=("$HOME/dotfiles")
+    ;;
+  *)
+    cat <<'USAGE'
+Usage:
+  nzm-cursor-split dev   Cursor.app + Claude + Term x2 (any cwd)
+  nzm-cursor-split ws    Cursor.app + Claude + Term x2 (~/dotfiles cwd)
+USAGE
+    exit 1
+    ;;
+esac
+
+# Build WezTerm pane layout
+vde-layout "$preset" --currentWindow
+
+# Launch Cursor.app
+if [[ ${#cursor_args[@]} -gt 0 ]]; then
+  open -na "Cursor" --args "${cursor_args[@]}"
+else
+  open -na "Cursor"
+fi
+
+# Trigger Hammerspoon window layout
+open "hammerspoon://cursor-split-start"

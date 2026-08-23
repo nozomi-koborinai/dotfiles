@@ -1,0 +1,28 @@
+[symlinks]
+"~/.zshrc" = "configs/zshrc"
+"~/.gitconfig" = "configs/gitconfig"
+"~/.config/nvim" = "configs/nvim"
+"~/.config/wezterm" = "configs/wezterm"
+"~/.config/gh/config.yml" = "configs/gh/config.yml"
+"~/.config/zeno/config.yml" = "configs/zeno/config.yml"
+"~/.hammerspoon" = "configs/hammerspoon"
+"~/Library/Application Support/lazygit/config.yml" = "configs/lazygit/config.yml"
+
+[tools]
+required = [
+    "git",
+    "nvim",
+    "gh",
+    "fzf",
+    "fd",
+    "lazygit",
+    "deno",
+    "node",
+    "cargo",
+    "wezterm",
+]
+
+[versions]
+node = ">= 22"
+git = ">= 2"
+nvim = ">= 0.10"

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "terradart": {
+      "command": "terradart-mcp"
+    },
+    "ableton-osc-mcp": {
+      "command": "/opt/homebrew/bin/ableton-osc-mcp"
+    }
+  }
+}
