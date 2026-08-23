@@ -19,6 +19,32 @@ declarative workspace layouts, and package management in one repository.
 
 See the [`Brewfile`](./Brewfile) for the complete package list.
 
+## Agent Configuration
+
+Claude Code and Cursor share the same reusable workflows while keeping their
+tool integrations separate:
+
+- Agent skills under [`configs/skills/`](./configs/skills/) are linked into
+  both `~/.claude/skills/` and `~/.cursor/skills/`.
+- Claude Code plugins, hooks, permissions, and marketplaces are declared in
+  [`configs/claude/settings-base.json`](./configs/claude/settings-base.json).
+- MCP servers are configured independently for
+  [Claude Code](./configs/claude/mcp.json) and
+  [Cursor](./configs/cursor/mcp.json).
+- Machine-local preferences such as model, theme, and effort level remain in
+  `~/.claude/settings.json` and are preserved during sync.
+
+### Shared Skills
+
+| Skill | Purpose |
+|-------|---------|
+| [`eli5`](./configs/skills/eli5/SKILL.md) | Build visual explanations for unfamiliar concepts |
+| [`vde-layout`](./configs/skills/vde-layout/SKILL.md) | Manage and modify workspace layout presets |
+
+The complete Claude Code plugin list lives in
+[`settings-base.json`](./configs/claude/settings-base.json), keeping the README
+from duplicating configuration that changes frequently.
+
 ## Quick Start
 
 Prerequisites:
