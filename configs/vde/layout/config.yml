@@ -23,7 +23,7 @@ presets:
 
   dev-cursor:
     name: "nzm: Dev (Cursor + Claude + Term split)"
-    description: "Cursor.app (left 70%) + Claude Code + Terminal x2 (right 30%)"
+    description: "Cursor.app (left 65%) + Claude Code + Terminal x2 (right 35%)"
     backend: wezterm
     layout:
       type: vertical
@@ -61,7 +61,7 @@ presets:
 
   ws-cursor:
     name: "nzm: Workspace (Cursor + Claude + Term split)"
-    description: "Cursor.app (left 70%) + Claude Code + Terminal x2 (right 30%, ~/dotfiles)"
+    description: "Cursor.app (left 65%) + Claude Code + Terminal x2 (right 35%, ~/dotfiles)"
     backend: wezterm
     layout:
       type: vertical

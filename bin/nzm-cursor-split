@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# nzm-cursor-split: Places Cursor.app on the left (70%) and WezTerm on the right (30%),
+# nzm-cursor-split: Places Cursor.app on the left (65%) and WezTerm on the right (35%),
 # configuring Claude Code + 2 terminal panes on the WezTerm side.
 # Usage:
 #   nzm-cursor-split dev   # Current working directory

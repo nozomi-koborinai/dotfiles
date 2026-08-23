@@ -56,31 +56,6 @@ Launch workspaces via WezTerm Command Palette (`Cmd+P`):
 
 ---
 
-## Document & Diff Viewers
-
-Terminal-launched browser utilities for reading specs and reviewing diffs without an editor:
-
-| Command | Description |
-|---------|-------------|
-| `mo README.md` | Preview Markdown in browser with live reload on save |
-| `mo docs/` | Preview all Markdown files in directory |
-| `mo --status` / `mo --shutdown` | Check status / stop background viewer server |
-| `difit HEAD` | Review last commit diff in a GitHub-like UI |
-| `difit main` | Review diff between current branch and `main` |
-| `difit --pr <URL>` | Review a GitHub PR locally |
-
-### Splitview: Auto Side-by-Side with WezTerm
-
-Automatically docks `mo` / `difit` in Chrome app mode on the right half and WezTerm on the left half:
-
-| Shortcut | Command | Action |
-|----------|---------|--------|
-| `svm` | `splitview mo <files>` | `mo` on right half, WezTerm on left half |
-| `svd` | `splitview difit <args>` | `difit` on right half, WezTerm on left half |
-| `svx` | `splitview-exit` | Close viewer and maximize WezTerm |
-
----
-
 ## Keybindings
 
 ### WezTerm
@@ -109,8 +84,8 @@ Leader key: `Ctrl+Q`
 
 | Key | Action |
 |-----|--------|
-| `Leader → D` | Split vertically (right) |
-| `Leader → R` | Split horizontally (down) |
+| `Leader → D` | Split pane downward |
+| `Leader → R` | Split pane to the right |
 | `Leader → X` | Close pane |
 | `Leader → H/J/K/L` | Navigate panes |
 | `Leader → Z` | Toggle pane zoom |
@@ -133,12 +108,17 @@ Leader key: `Ctrl+Q`
 
 Leader key: `Ctrl+A` (hides app if already focused)
 
-| Key | Target |
+| Key | Action |
 |-----|--------|
 | `Ctrl+A → Z` | Maximize window |
+| `Ctrl+A → H/J/K/L` | Focus the window in that direction |
+| `Ctrl+A → Shift+H/J/K/L` | Move the window to the display in that direction |
+| `Ctrl+A → 1/2/3` | Split the two frontmost windows left/right at 1:1, 2:1, 3:1 |
 | `Ctrl+A → B` | Google Chrome |
 | `Ctrl+A → Q` | WezTerm |
 | `Ctrl+A → S` | Cursor |
+| `Ctrl+A → E` | Ableton Live |
+| `Ctrl+A → G` | Grok Bot |
 | `Ctrl+A → Esc` | Cancel |
 
 ---

@@ -10,7 +10,7 @@ snippets:
   # Repo
   - name: repo cd
     keyword: rcd
-    snippet: cd $(find ~/StudioProjects ~/vs-code-projects -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
+    snippet: cd $(find ~/StudioProjects -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
   - name: repo clone
     keyword: rcl
     snippet: git -C $([ -d ~/StudioProjects ] && echo ~/StudioProjects || echo ~/vs-code-projects) clone
@@ -28,17 +28,6 @@ snippets:
   - name: git worktree remove
     keyword: gwtr
     snippet: git worktree remove
-
-  # Splitview (mo / difit + WezTerm 左右分割)
-  - name: splitview mo
-    keyword: svm
-    snippet: splitview mo
-  - name: splitview difit
-    keyword: svd
-    snippet: splitview difit
-  - name: splitview exit
-    keyword: svx
-    snippet: splitview-exit
 
   # ccusage (Claude Code 使用量)
   - name: ccusage
