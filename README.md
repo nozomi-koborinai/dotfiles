@@ -15,7 +15,7 @@ declarative workspace layouts, and package management in one repository.
 | Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
 | Runtimes | [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
 | Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
-| Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [OPA](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
+| Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
 | Git | [Git](https://git-scm.com/), [GitHub CLI](https://cli.github.com/), [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
 | AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex) | IDE and coding agents, shared skills, and MCP servers |
 
@@ -23,9 +23,11 @@ See the [`Brewfile`](./Brewfile) for the complete package list.
 
 ## Agent Configuration
 
-Claude Code and Cursor share the same reusable workflows while keeping their
-tool integrations separate:
+Repository guidance is shared across coding agents, while reusable workflows
+and tool integrations remain explicit:
 
+- [`AGENTS.md`](./AGENTS.md) is the canonical repository instruction file for
+  Cursor and Codex. [`CLAUDE.md`](./CLAUDE.md) imports it for Claude Code.
 - Agent skills under [`configs/skills/`](./configs/skills/) are linked into
   both `~/.claude/skills/` and `~/.cursor/skills/`.
 - Claude Code plugins, hooks, permissions, and marketplaces are declared in
@@ -171,26 +173,31 @@ The presets are declared in
 
 ```text
 .
+├── AGENTS.md             # Canonical repository instructions for coding agents
+├── CLAUDE.md             # Claude Code adapter that imports AGENTS.md
 ├── Brewfile              # Homebrew packages, casks, and taps
+├── README.md             # Human-facing setup and usage guide
 ├── setup.sh              # Initial setup and configuration linking
 ├── lib.sh                # Shared setup and maintenance helpers
 ├── bin/
 │   ├── dotfiles          # sync / update / prune command
 │   └── nzm-cursor-split  # Cursor + WezTerm split launcher
-└── configs/
-    ├── claude/           # Claude Code MCP and base settings
-    ├── colima/           # Colima VM configuration
-    ├── cursor/           # Cursor MCP configuration
-    ├── docker/           # Docker CLI configuration
-    ├── dotctor/          # Dotfiles health checks
-    ├── gh/               # GitHub CLI
-    ├── hammerspoon/      # macOS window management
-    ├── nvim/             # Neovim configuration and plugin lockfile
-    ├── skills/           # Shared Claude Code and Cursor skills
-    ├── vde/              # WezTerm workspace layouts
-    ├── wezterm/          # Terminal configuration and keybindings
-    ├── zeno/             # Shell abbreviations and completions
-    ├── gitconfig         # ~/.gitconfig
-    ├── gitignore         # ~/.config/git/ignore
-    └── zshrc             # ~/.zshrc
+├── configs/
+│   ├── claude/           # Claude Code MCP and base settings
+│   ├── colima/           # Colima VM configuration
+│   ├── cursor/           # Cursor MCP configuration
+│   ├── docker/           # Docker CLI configuration
+│   ├── dotctor/          # Dotfiles health checks
+│   ├── gh/               # GitHub CLI
+│   ├── hammerspoon/      # macOS window management
+│   ├── nvim/             # Neovim configuration and plugin lockfile
+│   ├── skills/           # Shared Claude Code and Cursor skills
+│   ├── vde/              # WezTerm workspace layouts
+│   ├── wezterm/          # Terminal configuration and keybindings
+│   ├── zeno/             # Shell abbreviations and completions
+│   ├── gitconfig         # ~/.gitconfig
+│   ├── gitignore         # ~/.config/git/ignore
+│   └── zshrc             # ~/.zshrc
+└── docs/
+    └── hero.webp         # README banner
 ```
