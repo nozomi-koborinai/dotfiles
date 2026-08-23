@@ -179,11 +179,12 @@ The presets are declared in
 ├── AGENTS.md             # Canonical repository instructions for coding agents
 ├── CLAUDE.md             # Claude Code adapter that imports AGENTS.md
 ├── Brewfile              # Homebrew packages, casks, and taps
+├── deno.json             # Validation task and pinned parser imports
 ├── README.md             # Human-facing setup and usage guide
 ├── setup.sh              # Initial setup and configuration linking
 ├── lib.sh                # Shared setup and maintenance helpers
 ├── scripts/
-│   └── validate.py       # Structured config and local-link checks
+│   └── validate.ts       # Structured config and local-link checks
 ├── bin/
 │   ├── dotfiles          # sync / update / prune command
 │   └── nzm-cursor-split  # Cursor + WezTerm split launcher

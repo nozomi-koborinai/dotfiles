@@ -51,10 +51,10 @@ Run checks relevant to the files changed:
 git diff --check
 bash -n setup.sh lib.sh bin/dotfiles bin/nzm-cursor-split
 stylua --check configs/
-uv run scripts/validate.py
+deno task validate
 ```
 
-- `scripts/validate.py` parses JSON, YAML, and TOML, checks repository-local
+- `scripts/validate.ts` parses JSON, YAML, and TOML, checks repository-local
   Markdown links, and verifies the `AGENTS.md` / `CLAUDE.md` adapter.
 - When changing `Brewfile`, run `brew bundle check --file=Brewfile` on macOS.
 - When changing Neovim or WezTerm configuration, load it with the corresponding

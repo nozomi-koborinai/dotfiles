@@ -34,13 +34,16 @@ jobs:
       - name: Run ShellCheck
         run: shellcheck setup.sh lib.sh bin/dotfiles bin/nzm-cursor-split
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+      - name: Install Deno
+        uses: denoland/setup-deno@22d081ff2d3a40755e97629de92e3bcbfa7cf2ed # v2.0.5
         with:
-          version: latest-known
+          deno-version: 2.9.5
 
       - name: Validate configuration and documentation
-        run: uv run scripts/validate.py
+        run: |
+          deno fmt --check deno.json scripts/validate.ts
+          deno check scripts/validate.ts
+          deno task validate
 
       - name: Check Lua formatting
         uses: JohnnyMorganz/stylua-action@76fd70c03e6340ceaf673366712db9b20560b402 # v5
