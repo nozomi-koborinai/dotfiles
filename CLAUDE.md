@@ -29,6 +29,7 @@ Personal development environment and dotfiles managed for macOS.
 | `configs/cursor/` | Cursor MCP configuration | → `~/.cursor/mcp.json` |
 | `configs/dotctor/` | dotctor configuration (health check) | → `~/.dotctor.toml` |
 | `bin/` | Custom CLI scripts | Added to PATH |
+| `docs/` | Images referenced by the README | Not deployed |
 
 ## Conventions
 

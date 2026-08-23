@@ -1,5 +1,7 @@
 # dotfiles
 
+![Terminal panes wired to pluggable agent skill modules](./docs/hero.webp)
+
 An opinionated, reproducible development environment for macOS on Apple
 silicon. It combines terminal-first editing, AI-assisted development,
 declarative workspace layouts, and package management in one repository.
