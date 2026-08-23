@@ -30,10 +30,6 @@ dotfiles sync                                  # Apply colima.yaml + configure d
 
 Subsequent runs only need `colima start` / `colima stop`.
 
-### Raycast
-
-Manual import: `Settings → Advanced → Import` → `configs/raycast/Raycast.rayconfig`.
-
 ---
 
 ## Daily Commands
@@ -143,7 +139,6 @@ configs/
   claude/        → ~/.claude (MCP servers & base settings)
   cursor/        → ~/.cursor/mcp.json (Cursor MCP settings)
   dotctor/       → ~/.dotctor.toml (Health check configuration)
-  raycast/       → Manual import
 bin/
   dotfiles       → dotfiles sync / update / prune CLI
 lib.sh           → Shell helpers shared by setup.sh and bin/dotfiles

@@ -28,7 +28,6 @@ Personal development environment and dotfiles managed for macOS.
 | `configs/claude/` | Claude Code MCP & settings | → `~/.claude/` |
 | `configs/cursor/` | Cursor MCP configuration | → `~/.cursor/mcp.json` |
 | `configs/dotctor/` | dotctor configuration (health check) | → `~/.dotctor.toml` |
-| `configs/raycast/` | Raycast settings | Manual import |
 | `bin/` | Custom CLI scripts | Added to PATH |
 
 ## Conventions
