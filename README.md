@@ -2,6 +2,8 @@
 
 ![Terminal panes wired to pluggable agent skill modules](./docs/hero.webp)
 
+[![Validate](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml/badge.svg)](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml)
+
 An opinionated, reproducible development environment for macOS on Apple
 silicon. It combines terminal-first editing, AI-assisted development,
 declarative workspace layouts, and package management in one repository.
@@ -173,12 +175,15 @@ The presets are declared in
 
 ```text
 .
+├── .github/workflows/   # Static validation on pull requests and main
 ├── AGENTS.md             # Canonical repository instructions for coding agents
 ├── CLAUDE.md             # Claude Code adapter that imports AGENTS.md
 ├── Brewfile              # Homebrew packages, casks, and taps
 ├── README.md             # Human-facing setup and usage guide
 ├── setup.sh              # Initial setup and configuration linking
 ├── lib.sh                # Shared setup and maintenance helpers
+├── scripts/
+│   └── validate.py       # Structured config and local-link checks
 ├── bin/
 │   ├── dotfiles          # sync / update / prune command
 │   └── nzm-cursor-split  # Cursor + WezTerm split launcher
