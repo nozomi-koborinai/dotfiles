@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "validate": "deno run --allow-read --frozen scripts/validate.ts"
+  },
+  "imports": {
+    "@std/toml": "jsr:@std/toml@1.0.11",
+    "@std/yaml": "jsr:@std/yaml@1.2.0"
+  }
+}
