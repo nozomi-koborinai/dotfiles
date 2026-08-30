@@ -22,6 +22,7 @@ brew "jq"
 brew "go"
 brew "googleworkspace-cli"
 brew "lazygit"
+brew "mise"
 brew "neovim"
 # Host for globally installed npm CLIs; project runtimes come from fnm.
 brew "node"
