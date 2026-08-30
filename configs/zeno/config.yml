@@ -2,10 +2,10 @@ snippets:
   # Repo
   - name: repo cd
     keyword: rcd
-    snippet: cd $(find ~/StudioProjects -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
+    snippet: cd $(find "$NZM_PROJECTS" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | fzf --prompt 'Repo> ' --delimiter '/' --with-nth -1 --preview 'ls -la {}')
   - name: repo clone
     keyword: rcl
-    snippet: git -C ~/StudioProjects clone
+    snippet: git -C "$NZM_PROJECTS" clone
 
   # Git
   - name: git
