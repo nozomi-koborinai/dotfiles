@@ -17,8 +17,10 @@ autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
-# Node version manager. --use-on-cd picks up .nvmrc / .node-version per project.
+# mise: project tools from mise.toml / .tool-versions.
+# fnm stays after it so .nvmrc still wins for Node.
 # Guarded so a machine that has not run setup.sh yet still gets a working shell.
+command -v mise > /dev/null && eval "$(mise activate zsh)"
 command -v fnm > /dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
 
 ## [Completion]
