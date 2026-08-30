@@ -26,7 +26,6 @@ command -v fnm > /dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
 [[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Google Cloud SDK
