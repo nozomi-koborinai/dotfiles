@@ -97,6 +97,10 @@ keep it, or run `dotfiles prune` to remove it explicitly.
 When `dotfiles update` changes `configs/nvim/lazy-lock.json`, commit that file
 so every machine receives the same plugin versions.
 
+`rcd` and `rcl` read `$NZM_PROJECTS`. If that variable is unset, the first
+existing directory of `~/StudioProjects` and `~/vs-code-projects` is used.
+Set `NZM_PROJECTS` in `~/.zshrc.local` on a machine that uses another path.
+
 ## Workspace Layouts
 
 Open the WezTerm Command Palette with `Cmd+P`:

@@ -33,6 +33,19 @@ export PATH="$HOME/.local/bin:$PATH"
 # Google Cloud SDK
 export PATH="/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
 
+# Project checkout root for zeno rcd / rcl. Leave NZM_PROJECTS unset to pick
+# the first existing directory; set it in ~/.zshrc.local for any other path.
+if [[ -z "${NZM_PROJECTS:-}" ]]; then
+  for dir in "$HOME/StudioProjects" "$HOME/vs-code-projects"; do
+    if [[ -d "$dir" ]]; then
+      NZM_PROJECTS="$dir"
+      break
+    fi
+  done
+  : "${NZM_PROJECTS:=$HOME/StudioProjects}"
+fi
+export NZM_PROJECTS
+
 # ===== zeno.zsh (abbreviation) =====
 export ZENO_HOME="$HOME/.zeno"
 if [[ -f "$ZENO_HOME/zeno.zsh" ]]; then
@@ -82,3 +95,6 @@ function gwtclean() {
 function gsync() {
   git sync && gwtclean && git branch
 }
+
+# Machine-local overrides. Not in the repository.
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
