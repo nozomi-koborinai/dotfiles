@@ -49,7 +49,7 @@ Run checks relevant to the files changed:
 
 ```bash
 git diff --check
-bash -n setup.sh lib.sh bin/dotfiles bin/nzm-cursor-split
+bash -n setup.sh lib.sh bin/dotfiles bin/nzm-cursor-split bin/nzm-zeno-server
 stylua --check configs/
 deno task validate
 ```

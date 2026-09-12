@@ -193,7 +193,8 @@ The presets are declared in
 │   └── validate.ts       # Structured config and local-link checks
 ├── bin/
 │   ├── dotfiles          # sync / update / prune command
-│   └── nzm-cursor-split  # Cursor + WezTerm split launcher
+│   ├── nzm-cursor-split  # Cursor + WezTerm split launcher
+│   └── nzm-zeno-server   # Zeno socket server isolated from project Deno configs
 ├── configs/
 │   ├── claude/           # Claude Code MCP and base settings
 │   ├── colima/           # Colima VM configuration

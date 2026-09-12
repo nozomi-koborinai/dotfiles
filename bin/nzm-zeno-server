@@ -1,0 +1,21 @@
+#!/bin/bash
+# Start zeno's socket server from zeno's own tree.
+# Deno 2.9 treats `deno run -- script.ts` as a task invocation, and
+# `--node-modules-dir=auto` from a project cwd walks up to a parent
+# package.json (for example StudioProjects/package.json) and installs it.
+set -euo pipefail
+
+root="${ZENO_ROOT:-$HOME/.zeno}"
+cd "$root"
+
+exec deno run \
+  --no-config \
+  --node-modules-dir=none \
+  --no-check \
+  --allow-env \
+  --allow-read \
+  --allow-run \
+  --allow-write \
+  --allow-ffi \
+  --allow-net \
+  "$root/src/server.ts" "$@"

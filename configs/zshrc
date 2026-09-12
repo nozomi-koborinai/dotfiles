@@ -48,6 +48,12 @@ export NZM_PROJECTS
 
 # ===== zeno.zsh (abbreviation) =====
 export ZENO_HOME="$HOME/.zeno"
+# Deno 2.9+ treats `deno run -- script.ts` as a task, and zeno-init's
+# `deno cache --node-modules-dir=auto` inherits the current project's
+# package.json (including a parent directory). Isolate the socket server
+# and skip that cache step.
+export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+export ZENO_SERVER_BIN="$HOME/dotfiles/bin/nzm-zeno-server"
 if [[ -f "$ZENO_HOME/zeno.zsh" ]]; then
   source "$ZENO_HOME/zeno.zsh"
   bindkey ' ' zeno-auto-snippet
