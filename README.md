@@ -46,6 +46,7 @@ and tool integrations remain explicit:
 | Skill | Purpose |
 |-------|---------|
 | [`eli5`](./configs/skills/eli5/SKILL.md) | Build visual explanations for unfamiliar concepts |
+| [`typesafe-ai`](./configs/skills/typesafe-ai/SKILL.md) | Build with TypeSafe System One judgments and primitives |
 | [`vde-layout`](./configs/skills/vde-layout/SKILL.md) | Manage and modify workspace layout presets |
 
 The complete Claude Code plugin list lives in
