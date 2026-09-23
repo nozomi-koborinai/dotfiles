@@ -122,9 +122,6 @@ link_file "$CONFIGS_DIR/vde/layout/config.yml" ~/.config/vde/layout/config.yml
 # lazygit
 link_file "$CONFIGS_DIR/lazygit/config.yml" "$HOME/Library/Application Support/lazygit/config.yml"
 
-# dotctor (the binary itself comes from the Brewfile)
-link_file "$CONFIGS_DIR/dotctor/dotctor.toml" ~/.dotctor.toml
-
 # docker config (merge base settings into existing config)
 mkdir -p ~/.docker
 DOCKER_CONFIG="$HOME/.docker/config.json"
@@ -216,9 +213,3 @@ fi
 
 echo ""
 echo "Setup complete!"
-
-# dotctor health check
-if command -v dotctor &> /dev/null; then
-  echo ""
-  dotctor
-fi

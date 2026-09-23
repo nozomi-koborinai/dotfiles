@@ -201,7 +201,6 @@ The presets are declared in
 │   ├── colima/           # Colima VM configuration
 │   ├── cursor/           # Cursor MCP configuration
 │   ├── docker/           # Docker CLI configuration
-│   ├── dotctor/          # Dotfiles health checks
 │   ├── gh/               # GitHub CLI
 │   ├── hammerspoon/      # macOS window management
 │   ├── nvim/             # Neovim configuration and plugin lockfile
