@@ -4,6 +4,7 @@ tap "leoafarias/fvm"
 tap "nozomi-koborinai/tap"
 
 brew "act"
+brew "actionlint"
 brew "bash-completion"
 brew "zstd"
 brew "openjdk"
