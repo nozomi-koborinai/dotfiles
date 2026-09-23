@@ -16,6 +16,7 @@ declarative workspace layouts, and package management in one repository.
 | Editor | [Neovim](https://neovim.io/) | Terminal-first editing |
 | Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
 | Browser | [Vimium](https://vimium.github.io/) | Chrome keyboard navigation; options live in [`configs/vimium/`](./configs/vimium/) and are pasted into the extension (cannot be symlinked) |
+| Keyboard | [Conductor Monokey](https://plotoftheprototype.com/products/monokey) | Split keyboard layout; export lives in [`configs/conductor-monokey/`](./configs/conductor-monokey/) and is imported via the configurator |
 | Runtimes | [mise](https://mise.jdx.dev/), [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
 | Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
 | Processes | [process-compose](https://github.com/F1bonacc1/process-compose) | Local multi-process orchestration |
@@ -79,9 +80,10 @@ The setup script installs missing Brewfile packages, links the managed
 configuration, installs Node.js 22 through fnm, and restores the Neovim plugin
 versions pinned in `lazy-lock.json`.
 
-Browser extension settings such as [Vimium](./configs/vimium/README.md) cannot
-be symlinked by macOS; their configuration files live in `configs/` and are
-applied by pasting into the extension options.
+Browser extension settings such as [Vimium](./configs/vimium/README.md) and
+keyboard layouts such as [Conductor Monokey](./configs/conductor-monokey/README.md)
+cannot be symlinked by macOS; their configuration files live in `configs/` and
+are applied via their respective configurator or options interfaces.
 
 ### Optional: Start Colima
 
@@ -208,6 +210,7 @@ The presets are declared in
 ├── configs/
 │   ├── claude/           # Claude Code MCP and base settings
 │   ├── colima/           # Colima VM configuration
+│   ├── conductor-monokey/# Conductor Monokey keyboard layout export
 │   ├── cursor/           # Cursor MCP + always-applied rules (pstack models)
 │   ├── docker/           # Docker CLI configuration
 │   ├── gh/               # GitHub CLI

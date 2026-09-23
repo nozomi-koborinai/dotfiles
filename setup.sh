@@ -218,5 +218,8 @@ fi
 # vimium (chrome extension options cannot be symlinked; manual paste required)
 echo "  vimium: options are managed in configs/vimium/ (paste excluded-urls, key-mappings, and link-hints.css into extension settings)"
 
+# conductor monokey (keyboard layout export cannot be symlinked; manual import required)
+echo "  conductor-monokey: layout is managed in configs/conductor-monokey/ (import conductor-monokey.json in the configurator)"
+
 echo ""
 echo "Setup complete!"
