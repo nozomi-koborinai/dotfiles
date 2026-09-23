@@ -1,0 +1,16 @@
+# Tab / reload / restore: use Chrome (Cmd+T, Cmd+W, Shift+Cmd+T, Cmd+R, etc.)
+unmap t
+unmap T
+unmap yt
+unmap J
+unmap K
+unmap gt
+unmap gT
+unmap g0
+unmap g$
+unmap ^
+unmap x
+unmap X
+unmap W
+unmap r
+unmap R

@@ -9,9 +9,10 @@ pasting into the extension UI.
 1. Open `chrome://extensions` → Vimium → Details → Extension options
    (or press `?` in a normal page, then open Options).
 2. **Excluded URLs**: replace the field with the contents of `excluded-urls`.
-3. **Custom key mappings**: leave empty (defaults). If you later add remaps,
-   put them in `key-mappings` and paste that field too.
-4. Save.
+3. **Custom key mappings**: replace the field with the contents of `key-mappings`.
+4. Click **Show Advanced Options**.
+5. **CSS for link hints**: replace the field with the contents of `link-hints.css`.
+6. Save.
 
 Do not exclude GitHub, X (Twitter), Google Cloud Console, or Cloudflare
 Dashboard; Vimium stays useful there.
