@@ -191,6 +191,10 @@ done
 # cursor mcp
 link_file "$CONFIGS_DIR/cursor/mcp.json" ~/.cursor/mcp.json
 
+# cursor rules (pstack model budget / per-role models)
+mkdir -p ~/.cursor/rules
+link_file "$CONFIGS_DIR/cursor/rules/pstack-models.mdc" ~/.cursor/rules/pstack-models.mdc
+
 # claude code mcp servers
 if command -v claude &> /dev/null; then
   while IFS= read -r name; do
