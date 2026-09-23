@@ -6,13 +6,13 @@ pasting into the extension UI.
 
 ## Apply
 
-1. Open `chrome://extensions` → Vimium → Details → Extension options
-   (or press `?` in a normal page, then open Options).
-2. **Excluded URLs**: replace the field with the contents of `excluded-urls`.
-3. **Custom key mappings**: replace the field with the contents of `key-mappings`.
-4. Click **Show Advanced Options**.
-5. **CSS for link hints**: replace the field with the contents of `link-hints.css`.
-6. Save.
+1. Open Vimium options: paste/open `chrome-extension://dbepggeogbaibhgnhhndojpepiihcmeb/pages/options.html` in Chrome (or `chrome://extensions` → Vimium → Details → Extension options).
+2. Excluded URLs ← contents of `excluded-urls`
+3. Custom key mappings ← contents of `key-mappings`
+4. Show Advanced Options → CSS for link hints ← `link-hints.css`
+5. Save
+
+Note: the `chrome-extension://` URL only works directly in Chrome with Vimium installed (GitHub web won't open it).
 
 Do not exclude GitHub, X (Twitter), Google Cloud Console, or Cloudflare
 Dashboard; Vimium stays useful there.
