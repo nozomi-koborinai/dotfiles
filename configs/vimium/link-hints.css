@@ -1,0 +1,16 @@
+div > .vimiumHintMarker {
+  background: #1c1c1e !important;
+  border: 1px solid #6366f1 !important;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  padding: 0 3px;
+}
+div > .vimiumHintMarker span {
+  color: #f4f4f5 !important;
+  text-shadow: none !important;
+  font-size: 11px;
+  font-weight: 600;
+}
+div > .vimiumHintMarker > .matchingCharacter {
+  color: #a5b4fc !important;
+}

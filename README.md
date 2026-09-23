@@ -74,6 +74,10 @@ The setup script installs missing Brewfile packages, links the managed
 configuration, installs Node.js 22 through fnm, and restores the Neovim plugin
 versions pinned in `lazy-lock.json`.
 
+Browser extension settings such as [Vimium](./configs/vimium/README.md) cannot
+be symlinked by macOS; their configuration files live in `configs/` and are
+applied by pasting into the extension options.
+
 ### Optional: Start Colima
 
 ```bash
@@ -206,6 +210,7 @@ The presets are declared in
 │   ├── nvim/             # Neovim configuration and plugin lockfile
 │   ├── skills/           # Shared Claude Code and Cursor skills
 │   ├── vde/              # WezTerm workspace layouts
+│   ├── vimium/           # Vimium Chrome extension options
 │   ├── wezterm/          # Terminal configuration and keybindings
 │   ├── zeno/             # Shell abbreviations and completions
 │   ├── gitconfig         # ~/.gitconfig

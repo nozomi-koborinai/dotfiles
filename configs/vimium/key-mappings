@@ -1,0 +1,21 @@
+# New tab / close / restore / reload → Chrome (Cmd+T, Cmd+W, Shift+Cmd+T, Cmd+R)
+unmap t
+unmap T
+unmap yt
+unmap x
+unmap X
+unmap W
+unmap r
+unmap R
+
+# History back/forward off; H/L = tabs (left/right)
+unmap H
+unmap L
+map H previousTab
+map L nextTab
+
+# J/K = 2x scroll speed (unmaps default tab switching; use H/L instead)
+unmap J
+unmap K
+map J scrollDown count=2
+map K scrollUp count=2
