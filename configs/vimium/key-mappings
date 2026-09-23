@@ -1,16 +1,15 @@
-# Tab / reload / restore: use Chrome (Cmd+T, Cmd+W, Shift+Cmd+T, Cmd+R, etc.)
+# New tab / close / restore / reload → Chrome (Cmd+T, Cmd+W, Shift+Cmd+T, Cmd+R)
 unmap t
 unmap T
 unmap yt
-unmap J
-unmap K
-unmap gt
-unmap gT
-unmap g0
-unmap g$
-unmap ^
 unmap x
 unmap X
 unmap W
 unmap r
 unmap R
+
+# History back/forward off; H/L = tabs (left/right)
+unmap H
+unmap L
+map H previousTab
+map L nextTab

@@ -21,4 +21,6 @@ Dashboard; Vimium stays useful there.
 
 - Hammerspoon uses `Ctrl+A` as a leader; it does not fight Vimium’s bare keys.
 - Conductor Monokey base is QWERTY, so default Vimium mappings stay fine.
+- Chrome owns new tab (`Cmd+T`), close tab (`Cmd+W`), restore tab (`Shift+Cmd+T`), and reload (`Cmd+R`), so their single-key Vimium equivalents are unmapped.
+- Tab switching remains in Vimium: `J`/`K`, `gt`/`gT`, and `H`/`L` (`H` for previous tab, `L` for next tab; default history navigation on `H`/`L` is disabled).
 - Prefer excluding keyboard-heavy web apps over remapping Vimium keys.
