@@ -188,35 +188,6 @@ The presets are declared in
 
 </details>
 
-<details>
-<summary><strong>Conductor Monokey</strong> — split keyboard layout</summary>
-
-Layout export lives in [`configs/conductor-monokey/`](./configs/conductor-monokey/) for the [Conductor Monokey](https://plotoftheprototype.com/products/monokey).
-
-### Active Layers
-
-| Layer | Name | Description | Key Bindings & Highlights |
-|-------|------|-------------|---------------------------|
-| 0 | `base` | Default typing layer | QWERTY alphas (`MINUS` on `R14`); Mod-Tap `Z` / `LShift`, `/` / `RShift`; Thumb cluster: `Tab`, `LAlt`, `LCtrl`, `MT(LGUI, LANG2)` (英数), `LT(1, Space)` (symbol), `LT(2, Bksp)` (number) on left; `LT(3, Enter)` (move), `MT(RCtrl, LANG1)` (かな), `LT(12, Enter)` (Precision), `RCmd` on right |
-| 1 | `symbol` | Symbols and macOS shortcuts | Number row shifted symbols (`!@#$%^&*()`); brackets and punctuation (`-`, `=`, `[`, `]`, `\`, `;`, `'`, `` ` ``); shortcuts: `Cmd+A`, `SS4` (`Cmd+Shift+4`), `SS5` (`Cmd+Shift+5`), `Ctrl+A`, `Ctrl+Q`, `Cmd+Z`, `Cmd+X`, `Cmd+C`, `Cmd+V`; `Esc`; `MO(6)` (setting momentary) |
-| 2 | `number` | Function keys and numpad | Function keys `F1`–`F12`; right-hand numpad (`0`–`9`, `+`, `-`, `*`, `/`, `.`, `,`); macOS navigation `Option+Cmd+Left` / `Option+Cmd+Right`; volume controls `Vol-` / `Vol+` |
-| 3 | `move` | Navigation and display | Arrow keys (`Left`, `Down`, `Up`, `Right`); word/line navigation `Ctrl+Left`/`Right`/`Up`/`Down`, `Cmd+Left`/`Right`, `Ctrl+E`; display brightness `Bri-` / `Bri+` |
-| 4 | `mouse` | Mouse buttons | Mouse buttons `MB1`, `MB2`, `MB3` |
-| 6 | `setting` | Bluetooth and system | Bluetooth profile selectors `BT 0`–`BT 4`; `BT Clr`, `BT All`; bootloader entry `Boot` |
-| 12 | `Precision` | Precision pointing | Mouse buttons `MB1`, `MB2`, `MB3`; precision toggle `TG(12)` |
-| 13 | `Gesture` | Trackball gestures | Navigation gestures `Ctrl+Up`, `Ctrl+Left`, `Ctrl+Right`, `Ctrl+Down` |
-
-### Combos
-
-| Combo | Name | Keys | Binding | Description |
-|-------|------|------|---------|-------------|
-| `dts-scroll` | `scroll` | `R12 + R13` (`K + L`) | `MO(5)` | Momentary layer 5 (scroll mode) |
-| `dts-gesture` | `gesture` | `R02 + R03` (`I + O`) | `MO(13)` | Momentary layer 13 (Gesture mode) |
-| `nvee3u` | `pair` | `L00 + L10 + L20` (`Q + A + Z`) | `BT_SEL 5` | Select Bluetooth profile 5 |
-| `651gdv` | `boot` | `R03 + L24 + L04` (`O + B + T`) | `BOOTLOADER` | Enter bootloader mode |
-
-</details>
-
 ## Repository Structure
 
 ```text
