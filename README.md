@@ -16,6 +16,7 @@ declarative workspace layouts, and package management in one repository.
 | Editor | [Neovim](https://neovim.io/) | Terminal-first editing |
 | Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
 | Browser | [Vimium](https://vimium.github.io/) | Chrome keyboard navigation; options live in [`configs/vimium/`](./configs/vimium/) and are pasted into the extension (cannot be symlinked) |
+| Keyboard | [Conductor Monokey](https://plotoftheprototype.com/products/monokey) | Split keyboard layout; export lives in [`configs/conductor-monokey/`](./configs/conductor-monokey/) and is imported via the configurator |
 | Runtimes | [mise](https://mise.jdx.dev/), [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
 | Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
 | Processes | [process-compose](https://github.com/F1bonacc1/process-compose) | Local multi-process orchestration |
@@ -79,9 +80,10 @@ The setup script installs missing Brewfile packages, links the managed
 configuration, installs Node.js 22 through fnm, and restores the Neovim plugin
 versions pinned in `lazy-lock.json`.
 
-Browser extension settings such as [Vimium](./configs/vimium/README.md) cannot
-be symlinked by macOS; their configuration files live in `configs/` and are
-applied by pasting into the extension options.
+Browser extension settings such as [Vimium](./configs/vimium/README.md) and
+keyboard layouts such as [Conductor Monokey](./configs/conductor-monokey/README.md)
+cannot be symlinked by macOS; their configuration files live in `configs/` and
+are applied via their respective configurator or options interfaces.
 
 ### Optional: Start Colima
 
@@ -186,6 +188,35 @@ The presets are declared in
 
 </details>
 
+<details>
+<summary><strong>Conductor Monokey</strong> — split keyboard layout</summary>
+
+Layout export lives in [`configs/conductor-monokey/`](./configs/conductor-monokey/) for the [Conductor Monokey](https://plotoftheprototype.com/products/monokey).
+
+### Active Layers
+
+| Layer | Name | Description | Key Bindings & Highlights |
+|-------|------|-------------|---------------------------|
+| 0 | `base` | Default typing layer | QWERTY alphas (`MINUS` on `R14`); Mod-Tap `Z` / `LShift`, `/` / `RShift`; Thumb cluster: `Tab`, `LAlt`, `LCtrl`, `MT(LGUI, LANG2)` (英数), `LT(1, Space)` (symbol), `LT(2, Bksp)` (number) on left; `LT(3, Enter)` (move), `MT(RCtrl, LANG1)` (かな), `LT(12, Enter)` (Precision), `RCmd` on right |
+| 1 | `symbol` | Symbols and macOS shortcuts | Number row shifted symbols (`!@#$%^&*()`); brackets and punctuation (`-`, `=`, `[`, `]`, `\`, `;`, `'`, `` ` ``); shortcuts: `Cmd+A`, `SS4` (`Cmd+Shift+4`), `SS5` (`Cmd+Shift+5`), `Ctrl+A`, `Ctrl+Q`, `Cmd+Z`, `Cmd+X`, `Cmd+C`, `Cmd+V`; `Esc`; `MO(6)` (setting momentary) |
+| 2 | `number` | Function keys and numpad | Function keys `F1`–`F12`; right-hand numpad (`0`–`9`, `+`, `-`, `*`, `/`, `.`, `,`); macOS navigation `Option+Cmd+Left` / `Option+Cmd+Right`; volume controls `Vol-` / `Vol+` |
+| 3 | `move` | Navigation and display | Arrow keys (`Left`, `Down`, `Up`, `Right`); word/line navigation `Ctrl+Left`/`Right`/`Up`/`Down`, `Cmd+Left`/`Right`, `Ctrl+E`; display brightness `Bri-` / `Bri+` |
+| 4 | `mouse` | Mouse buttons | Mouse buttons `MB1`, `MB2`, `MB3` |
+| 6 | `setting` | Bluetooth and system | Bluetooth profile selectors `BT 0`–`BT 4`; `BT Clr`, `BT All`; bootloader entry `Boot` |
+| 12 | `Precision` | Precision pointing | Mouse buttons `MB1`, `MB2`, `MB3`; precision toggle `TG(12)` |
+| 13 | `Gesture` | Trackball gestures | Navigation gestures `Ctrl+Up`, `Ctrl+Left`, `Ctrl+Right`, `Ctrl+Down` |
+
+### Combos
+
+| Combo | Name | Keys | Binding | Description |
+|-------|------|------|---------|-------------|
+| `dts-scroll` | `scroll` | `R12 + R13` (`K + L`) | `MO(5)` | Momentary layer 5 (scroll mode) |
+| `dts-gesture` | `gesture` | `R02 + R03` (`I + O`) | `MO(13)` | Momentary layer 13 (Gesture mode) |
+| `nvee3u` | `pair` | `L00 + L10 + L20` (`Q + A + Z`) | `BT_SEL 5` | Select Bluetooth profile 5 |
+| `651gdv` | `boot` | `R03 + L24 + L04` (`O + B + T`) | `BOOTLOADER` | Enter bootloader mode |
+
+</details>
+
 ## Repository Structure
 
 ```text
@@ -208,6 +239,7 @@ The presets are declared in
 ├── configs/
 │   ├── claude/           # Claude Code MCP and base settings
 │   ├── colima/           # Colima VM configuration
+│   ├── conductor-monokey/# Conductor Monokey keyboard layout export
 │   ├── cursor/           # Cursor MCP + always-applied rules (pstack models)
 │   ├── docker/           # Docker CLI configuration
 │   ├── gh/               # GitHub CLI
