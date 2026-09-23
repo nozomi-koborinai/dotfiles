@@ -211,5 +211,8 @@ else
   echo "  created settings.json"
 fi
 
+# vimium (chrome extension options cannot be symlinked; manual paste required)
+echo "  vimium: options are managed in configs/vimium/ (paste excluded-urls and key-mappings into extension settings)"
+
 echo ""
 echo "Setup complete!"
