@@ -41,7 +41,8 @@ and tool integrations remain explicit:
   [Cursor](./configs/cursor/mcp.json).
 - Cursor always-applied rules under
   [`configs/cursor/rules/`](./configs/cursor/rules/) (currently pstack model
-  budget) are linked into `~/.cursor/rules/`.
+  budget from [`setup-pstack`](https://github.com/cursor/plugins/tree/main/pstack))
+  are linked into `~/.cursor/rules/`.
 - Machine-local preferences such as model, theme, and effort level remain in
   `~/.claude/settings.json` and are preserved during sync.
 
