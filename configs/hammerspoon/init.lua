@@ -99,6 +99,9 @@ leader:bind("", "e", function() toggleApp("Live", "com.ableton.live") end)
 -- g: Grok Bot
 leader:bind("", "g", function() toggleApp("Grok Bot") end)
 
+-- n: Notion
+leader:bind("", "n", function() toggleApp("Notion") end)
+
 ----------------------------------------------------
 -- Split: two windows side by side at a given ratio.
 -- The focused window takes the left, the one behind it the right.
