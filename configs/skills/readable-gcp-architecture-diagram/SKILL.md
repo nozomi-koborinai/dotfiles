@@ -30,9 +30,9 @@ Produce a **clear draw.io + PNG** Google Cloud architecture figure that reads le
 ## Icons
 1. Source assets from [Google Cloud icons](https://cloud.google.com/icons) (download SVG/PNG Google publishes).
 2. Embed used icons into the `.drawio` (e.g. data URI) so the file is self-contained; keep copies under a local `media/icons/` if useful.
-3. **Distinct products:** when the reader must tell VPC / Cloud VPN / Cloud Router / NCC apart at a glance, use **legacy console icons** from that page (current branding often shares one Networking category icon).
-4. **Strict current branding:** if the user asks to follow the latest product-icon PDF only, use category icons where required and distinguish with labels.
-5. Do not invent unofficial glyphs. Prefer the Google Cloud logo asset from the same icons page for the outer GCP mark.
+3. **Icon priority:** prefer the **newest** official asset from cloud.google.com/icons for each product. Fall back to **legacy console icons** only when the current set has no distinct product icon (e.g. Networking products that share one category glyph) and the figure needs products to look different. Do not use one shared category icon for several different products when distinction matters.
+   - Example: Cloud Run → current individual; VPC / Cloud VPN / Cloud Router / NCC → legacy; Google Cloud mark → current logo.
+4. Do not invent unofficial glyphs.
 
 ## Steps
 1. Lock **content** with the operator first (what is draft vs fixed, what must not be recommended, audience language).
@@ -52,6 +52,6 @@ Produce a **clear draw.io + PNG** Google Cloud architecture figure that reads le
 - [ ] Left→right (or top→bottom) story is obvious
 - [ ] Every runtime edge has a label
 - [ ] Solid vs dashed matches the legend
-- [ ] Icons are from cloud.google.com/icons and match the operator's distinct-vs-current choice
+- [ ] Icons are from cloud.google.com/icons; newest official asset preferred, legacy only when current set lacks distinct product icons
 - [ ] Nested network ranges use containment boxes when showing hierarchy
 - [ ] PNG exported and visually QA'd; sources self-contained in `.drawio`
