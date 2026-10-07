@@ -52,6 +52,7 @@ and tool integrations remain explicit:
 | Skill | Purpose |
 |-------|---------|
 | [`eli5`](./configs/skills/eli5/SKILL.md) | Build visual explanations for unfamiliar concepts |
+| [`readable-gcp-architecture-diagram`](./configs/skills/readable-gcp-architecture-diagram/SKILL.md) | Create customer-facing GCP architecture diagrams with draw.io |
 | [`typesafe-ai`](./configs/skills/typesafe-ai/SKILL.md) | Build with TypeSafe System One judgments and primitives |
 | [`vde-layout`](./configs/skills/vde-layout/SKILL.md) | Manage and modify workspace layout presets |
 
