@@ -24,6 +24,13 @@ Produce a **clear draw.io + PNG** Google Cloud architecture figure that reads le
    - Thick solid = primary traffic (incl. IPsec tunnels)
    - Dashed = control / BGP / peering / spokes
    - **Every edge labeled** with what flows (e.g. Direct VPC egress, IPsec tunnel, BGP route exchange)—not just arrows.
+   - **Edge label placement:**
+     - Prefer draw.io **edge labels** attached to the edge (not free-floating text near the arrow).
+     - Place the label **on the edge** (or immediately below a horizontal run, centered) so the line and arrowhead remain visible; leave a small gap so the label does not sit on the arrow tip.
+     - Do not park labels on bends/corners of elbow edges—prefer a straight segment of the path.
+     - Avoid labels jammed against card bottoms or arrowheads; if needed, move the edge slightly away from the card edge for clearance.
+     - Keep white-background labels when overlapping lines so text stays readable.
+     - Apply the same placement consistently across all similar edges in a multi-option figure.
 6. **Legend** in a corner for solid vs dashed (and any "draft / TBD" marker).
 7. **Title** states the story in one line; keep labels short.
 
