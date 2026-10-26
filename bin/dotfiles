@@ -64,15 +64,58 @@ case "${1:-}" in
     echo "Update complete!"
     ;;
   prune)
-    echo "Removing packages this machine has but the Brewfile does not declare..."
+    assume_yes=0
+    shift
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        -y|--yes)
+          assume_yes=1
+          ;;
+        *)
+          echo "Usage: dotfiles prune [-y|--yes]" >&2
+          exit 2
+          ;;
+      esac
+      shift
+    done
 
-    if command -v brew &> /dev/null; then
-      trust_declared_taps
-      brew bundle cleanup --file="$DOTFILES_DIR/Brewfile" --force
+    plan_status=0
+    plan=$(prune_plan) || plan_status=$?
+
+    if [ "$plan_status" -ne 0 ] && [ -z "$plan" ]; then
+      echo "Cannot tell what would be removed. Nothing was removed." >&2
+      exit 1
     fi
 
-    sync_nvim_plugins
+    if [ -z "$plan" ] && [ "$plan_status" -eq 0 ]; then
+      echo "Nothing to remove."
+      exit 0
+    fi
 
+    echo ""
+    prune_plan_print "$plan"
+    if plan_has "$plan" nvim; then
+      echo "Agreeing also restores plugins to the versions in lazy-lock.json."
+    fi
+
+    if [ "$assume_yes" -eq 1 ]; then
+      echo "Removing without asking (--yes)."
+    elif [ -t 0 ]; then
+      answer=""
+      read -r -p "Proceed? [y/N] " answer || answer=""
+      case "$answer" in
+        y|Y|yes) ;;
+        *)
+          echo "Aborted. Nothing was removed." >&2
+          exit 1
+          ;;
+      esac
+    else
+      echo "Aborted: stdin is not a terminal, so prune cannot ask. Re-run with --yes to remove without asking." >&2
+      exit 1
+    fi
+
+    prune_apply "$plan"
     echo ""
     echo "Done!"
     ;;
@@ -82,6 +125,6 @@ case "${1:-}" in
     echo "Commands:"
     echo "  sync      Pull latest and apply symlinks"
     echo "  update    Update all managed tools"
-    echo "  prune     Uninstall packages not declared in the Brewfile"
+    echo "  prune     List removals and uninstall after confirmation (-y/--yes skips the question)"
     ;;
 esac

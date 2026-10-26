@@ -101,11 +101,14 @@ After the VM has been created, use `colima start` and `colima stop` as needed.
 |---------|--------------|
 | `dotfiles sync` | Pull changes, install missing dependencies, apply symlinks, and restore pinned Neovim plugins |
 | `dotfiles update` | Upgrade Homebrew packages, CLI extensions, Zeno, vde-layout, and Neovim plugins |
-| `dotfiles prune` | Uninstall Homebrew packages absent from the Brewfile and clean Neovim plugins |
+| `dotfiles prune` | List undeclared formulae, casks, taps, and Neovim plugins, then remove them after confirmation |
 
 For Homebrew, `sync` reports packages that are installed locally but absent
 from the Brewfile; it does not uninstall them. Add a package to the Brewfile to
-keep it, or run `dotfiles prune` to remove it explicitly.
+keep it. `dotfiles prune` lists undeclared formulae, casks, and taps, and the
+Neovim plugins it can preview, then removes them only after `y`, `Y`, or `yes`.
+`--yes` skips the question. With no terminal and no `--yes`, prune removes
+nothing. An empty list exits 0 without asking.
 
 When `dotfiles update` changes `configs/nvim/lazy-lock.json`, commit that file
 so every machine receives the same plugin versions.

@@ -2,8 +2,13 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+if vim.env.DOTFILES_NVIM_CLEAN_PREVIEW == "1" then
+  require("config.clean_preview")
+  return
+end
+
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
     "git",
