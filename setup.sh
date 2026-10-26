@@ -35,7 +35,7 @@ if command -v brew &> /dev/null; then
     echo ""
     echo "  Undeclared packages (installed but missing from the Brewfile):"
     printf '    %s\n' "${undeclared//$'\n'/$'\n    '}"
-    echo "    Add them to the Brewfile, or run 'dotfiles prune' to uninstall them."
+    echo "    Add them to the Brewfile, or run 'dotfiles prune' to review and uninstall them."
     echo ""
   fi
 fi

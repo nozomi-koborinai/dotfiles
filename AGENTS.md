@@ -26,7 +26,8 @@ lists into this file.
   `setup.sh`, or `configs/`.
 - Keep `setup.sh` repeatable. Routine `sync` may install or restore state but
   must not uninstall Homebrew packages; destructive package cleanup belongs to
-  `dotfiles prune`.
+  `dotfiles prune`. Prune lists the removals and asks unless `--yes` was
+  passed. A non-TTY run without `--yes` removes nothing.
 - Put shell logic shared by `setup.sh` and `bin/dotfiles` in `lib.sh`.
 - When adding a managed config, add its source under `configs/`, deploy it from
   `setup.sh`, and update the README when users need to know about it.
