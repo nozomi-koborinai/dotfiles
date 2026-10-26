@@ -41,11 +41,10 @@ case "${1:-}" in
       git -C "$HOME/.zeno" pull
     fi
 
-    # vde-layout
-    if command -v npm &> /dev/null; then
+    if command -v mise &> /dev/null; then
       echo ""
-      echo "==> vde-layout"
-      npm update -g vde-layout
+      echo "==> mise"
+      mise upgrade --global
     fi
 
     # nvim plugins

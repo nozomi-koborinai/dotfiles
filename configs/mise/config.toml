@@ -1,0 +1,8 @@
+[tools]
+node = "24"
+# aube refuses packages under 1,000 weekly downloads unless approved.
+"npm:vde-layout" = { version = "latest", allow_low_downloads = true }
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]
+idiomatic_version_file_disable_files = ["node:package.json"]
