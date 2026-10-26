@@ -1,6 +1,6 @@
 # dotfiles
 
-![Terminal panes wired to pluggable agent skill modules](./docs/hero.webp)
+![Terminal panes wired to pluggable agent skill modules](https://github.com/user-attachments/assets/0a95eb53-8948-4a02-8040-18364cfd2749)
 
 [![Validate](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml/badge.svg)](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml)
 
@@ -114,10 +114,7 @@ nothing. An empty list exits 0 without asking.
 Node.js and global npm CLIs come from mise. They are declared in
 [`configs/mise/config.toml`](./configs/mise/config.toml). Add a global CLI
 there as an `npm:` tool. `npm install -g` hides that command after a project
-switches Node. A `package.json` does not select Node. After merging, run
-`dotfiles sync` and then `dotfiles prune` on each machine. Sync installs Node
-and vde-layout through mise and removes an old vde-layout from Homebrew Node
-and from fnm. Prune uninstalls the `fnm` and `node` formulae.
+switches Node. A `package.json` does not select Node.
 
 When `dotfiles update` changes `configs/nvim/lazy-lock.json`, commit that file
 so every machine receives the same plugin versions. When update reports a
@@ -222,24 +219,22 @@ The presets are declared in
 │   ├── dotfiles          # sync / update / prune command
 │   ├── nzm-cursor-split  # Cursor + WezTerm split launcher
 │   └── nzm-zeno-server   # Zeno socket server isolated from project Deno configs
-├── configs/
-│   ├── claude/           # Claude Code MCP and base settings
-│   ├── colima/           # Colima VM configuration
-│   ├── conductor-monokey/# Conductor Monokey keyboard layout export
-│   ├── cursor/           # Cursor MCP + always-applied rules (pstack models)
-│   ├── docker/           # Docker CLI configuration
-│   ├── gh/               # GitHub CLI
-│   ├── hammerspoon/      # macOS window management
-│   ├── mise/             # Node.js and global npm CLIs (~/.config/mise/config.toml)
-│   ├── nvim/             # Neovim configuration and plugin lockfile
-│   ├── skills/           # Shared Claude Code and Cursor skills
-│   ├── vde/              # WezTerm workspace layouts
-│   ├── vimium/           # Vimium Chrome extension options
-│   ├── wezterm/          # Terminal configuration and keybindings
-│   ├── zeno/             # Shell abbreviations and completions
-│   ├── gitconfig         # ~/.gitconfig
-│   ├── gitignore         # ~/.config/git/ignore
-│   └── zshrc             # ~/.zshrc
-└── docs/
-    └── hero.webp         # README banner
+└── configs/
+    ├── claude/           # Claude Code MCP and base settings
+    ├── colima/           # Colima VM configuration
+    ├── conductor-monokey/# Conductor Monokey keyboard layout export
+    ├── cursor/           # Cursor MCP + always-applied rules (pstack models)
+    ├── docker/           # Docker CLI configuration
+    ├── gh/               # GitHub CLI
+    ├── hammerspoon/      # macOS window management
+    ├── mise/             # Node.js and global npm CLIs (~/.config/mise/config.toml)
+    ├── nvim/             # Neovim configuration and plugin lockfile
+    ├── skills/           # Shared Claude Code and Cursor skills
+    ├── vde/              # WezTerm workspace layouts
+    ├── vimium/           # Vimium Chrome extension options
+    ├── wezterm/          # Terminal configuration and keybindings
+    ├── zeno/             # Shell abbreviations and completions
+    ├── gitconfig         # ~/.gitconfig
+    ├── gitignore         # ~/.config/git/ignore
+    └── zshrc             # ~/.zshrc
 ```

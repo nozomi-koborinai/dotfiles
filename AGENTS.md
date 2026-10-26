@@ -44,6 +44,8 @@ lists into this file.
 - Do not commit credentials, tokens, company information, private URLs, or
   machine-local identifiers. Treat encrypted exports as unreviewable and keep
   them outside the repository.
+- Do not commit image binaries. Host a README image with a GitHub
+  user-attachments URL.
 - Use lowercase file and directory names except where a tool convention
   requires otherwise, such as `Brewfile`, `AGENTS.md`, or `SKILL.md`.
 
