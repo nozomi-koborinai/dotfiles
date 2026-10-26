@@ -17,7 +17,7 @@ declarative workspace layouts, and package management in one repository.
 | Workspace | [vde-layout](https://www.npmjs.com/package/vde-layout), [Hammerspoon](https://www.hammerspoon.org/) | Reproducible pane layouts and macOS window management |
 | Browser | [Vimium](https://vimium.github.io/) | Chrome keyboard navigation; options live in [`configs/vimium/`](./configs/vimium/) and are pasted into the extension (cannot be symlinked) |
 | Keyboard | [Conductor Monokey](https://plotoftheprototype.com/products/monokey) | Split keyboard layout; export lives in [`configs/conductor-monokey/`](./configs/conductor-monokey/) and is imported via the configurator |
-| Runtimes | [mise](https://mise.jdx.dev/), [fnm](https://github.com/Schniz/fnm), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
+| Runtimes | [mise](https://mise.jdx.dev/), [uv](https://docs.astral.sh/uv/), [Go](https://go.dev/), [Rust](https://www.rust-lang.org/), [Dart](https://dart.dev/), [FVM](https://fvm.app/) | Language runtimes and SDKs |
 | Containers | [Colima](https://github.com/abiosoft/colima), [Docker](https://www.docker.com/) | Local container runtime and CLI |
 | Processes | [process-compose](https://github.com/F1bonacc1/process-compose) | Local multi-process orchestration |
 | Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
@@ -78,8 +78,9 @@ cd ~/dotfiles
 ```
 
 The setup script installs missing Brewfile packages, links the managed
-configuration, installs Node.js 22 through fnm, and restores the Neovim plugin
-versions pinned in `lazy-lock.json`.
+configuration, installs Node.js and vde-layout through mise, and restores the
+Neovim plugin versions pinned in `lazy-lock.json`. A project that pins Node
+with `.nvmrc`, `.node-version`, or `mise.toml` switches to it on `cd`.
 
 Browser extension settings such as [Vimium](./configs/vimium/README.md) and
 keyboard layouts such as [Conductor Monokey](./configs/conductor-monokey/README.md)
@@ -100,7 +101,7 @@ After the VM has been created, use `colima start` and `colima stop` as needed.
 | Command | What it does |
 |---------|--------------|
 | `dotfiles sync` | Pull changes, install missing dependencies, apply symlinks, and restore pinned Neovim plugins |
-| `dotfiles update` | Upgrade Homebrew packages, CLI extensions, Zeno, vde-layout, and Neovim plugins |
+| `dotfiles update` | Upgrade Homebrew packages, CLI extensions, Zeno, mise tools (Node.js within its major, vde-layout), and Neovim plugins |
 | `dotfiles prune` | List undeclared formulae, casks, taps, and Neovim plugins, then remove them after confirmation |
 
 For Homebrew, `sync` reports packages that are installed locally but absent
@@ -110,8 +111,18 @@ Neovim plugins it can preview, then removes them only after `y`, `Y`, or `yes`.
 `--yes` skips the question. With no terminal and no `--yes`, prune removes
 nothing. An empty list exits 0 without asking.
 
+Node.js and global npm CLIs come from mise. They are declared in
+[`configs/mise/config.toml`](./configs/mise/config.toml). Add a global CLI
+there as an `npm:` tool. `npm install -g` hides that command after a project
+switches Node. A `package.json` does not select Node. After merging, run
+`dotfiles sync` and then `dotfiles prune` on each machine. Sync installs Node
+and vde-layout through mise and removes an old vde-layout from Homebrew Node
+and from fnm. Prune uninstalls the `fnm` and `node` formulae.
+
 When `dotfiles update` changes `configs/nvim/lazy-lock.json`, commit that file
-so every machine receives the same plugin versions.
+so every machine receives the same plugin versions. When update reports a
+newer Node.js major, raise `node` in `configs/mise/config.toml` and commit it.
+`dotfiles update` never rewrites that file itself.
 
 `rcd` and `rcl` read `$NZM_PROJECTS`. If that variable is unset, the first
 existing directory of `~/StudioProjects` and `~/vs-code-projects` is used.
@@ -219,6 +230,7 @@ The presets are declared in
 │   ├── docker/           # Docker CLI configuration
 │   ├── gh/               # GitHub CLI
 │   ├── hammerspoon/      # macOS window management
+│   ├── mise/             # Node.js and global npm CLIs (~/.config/mise/config.toml)
 │   ├── nvim/             # Neovim configuration and plugin lockfile
 │   ├── skills/           # Shared Claude Code and Cursor skills
 │   ├── vde/              # WezTerm workspace layouts

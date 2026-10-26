@@ -29,6 +29,9 @@ lists into this file.
   `dotfiles prune`. Prune lists the removals and asks unless `--yes` was
   passed. A non-TTY run without `--yes` removes nothing.
 - Put shell logic shared by `setup.sh` and `bin/dotfiles` in `lib.sh`.
+- Declare Node.js and global npm CLIs in `configs/mise/config.toml`.
+  Declare an npm package as an `npm:` tool. Do not add `npm install -g`.
+  A Node switch hides a command installed that way.
 - When adding a managed config, add its source under `configs/`, deploy it from
   `setup.sh`, and update the README when users need to know about it.
 - Keep shared Agent Skills under `configs/skills/<skill-name>/SKILL.md`; setup

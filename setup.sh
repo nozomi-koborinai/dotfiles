@@ -96,24 +96,34 @@ link_file "$CONFIGS_DIR/wezterm" ~/.config/wezterm
 # hammerspoon
 link_file "$CONFIGS_DIR/hammerspoon" ~/.hammerspoon
 
-# node for project work; fnm switches per project from .nvmrc / .node-version
-if command -v fnm &> /dev/null && ! fnm list | grep -q default; then
-  echo "Installing node 22 via fnm..."
-  fnm install 22
-  fnm default 22
-fi
+mkdir -p ~/.config/mise
+link_file "$CONFIGS_DIR/mise/config.toml" ~/.config/mise/config.toml
+if command -v mise &> /dev/null; then
+  mise --cd "$DOTFILES_DIR" install || echo "  mise install: partially failed (check log above)"
 
-# vde-layout, pinned to Homebrew's node so switching fnm versions can't hide it
-if command -v brew &> /dev/null; then
-  BREW_PREFIX="$(brew --prefix)"
-  stale_vde=$(command -v vde-layout 2>/dev/null || true)
-  if [ -n "$stale_vde" ] && [ "$stale_vde" != "$BREW_PREFIX/bin/vde-layout" ]; then
-    npm uninstall -g vde-layout &> /dev/null || true
-    echo "  removed vde-layout from $(dirname "$stale_vde")"
-  fi
-  if [ ! -x "$BREW_PREFIX/bin/vde-layout" ] && [ -x "$BREW_PREFIX/bin/npm" ]; then
-    echo "Installing vde-layout..."
-    "$BREW_PREFIX/bin/npm" install -g vde-layout
+  if mise which vde-layout &> /dev/null; then
+    old_vde_prefixes=("${HOMEBREW_PREFIX:-/opt/homebrew}")
+    fnm_dirs=("$HOME/.local/share/fnm" "$HOME/.fnm" "$HOME/Library/Application Support/fnm")
+    if [ -n "${XDG_DATA_HOME:-}" ]; then
+      fnm_dirs+=("$XDG_DATA_HOME/fnm")
+    fi
+    if [ -n "${FNM_DIR:-}" ]; then
+      fnm_dirs+=("$FNM_DIR")
+    fi
+    for fnm_dir in "${fnm_dirs[@]}"; do
+      for version_dir in "$fnm_dir"/node-versions/*/installation; do
+        [ -d "$version_dir" ] || continue
+        old_vde_prefixes+=("$version_dir")
+      done
+    done
+    for prefix in "${old_vde_prefixes[@]}"; do
+      [ -d "$prefix/lib/node_modules/vde-layout" ] || continue
+      case "$(readlink "$prefix/bin/vde-layout" 2> /dev/null)" in
+        *node_modules/vde-layout/*) rm -f "$prefix/bin/vde-layout" ;;
+      esac
+      rm -rf "$prefix/lib/node_modules/vde-layout"
+      echo "  removed old vde-layout from $prefix"
+    done
   fi
 fi
 mkdir -p ~/.config/vde/layout
