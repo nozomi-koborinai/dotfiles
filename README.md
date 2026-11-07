@@ -1,6 +1,6 @@
 # dotfiles
 
-![Terminal panes wired to pluggable agent skill modules](https://github.com/user-attachments/assets/0a95eb53-8948-4a02-8040-18364cfd2749)
+![dotfiles sync: one command to sync your development environment](https://github.com/user-attachments/assets/0be6bacb-d6e3-492a-be27-8dab27d55f6b)
 
 [![Validate](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml/badge.svg)](https://github.com/nozomi-koborinai/dotfiles/actions/workflows/validate.yml)
 
