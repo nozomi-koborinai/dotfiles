@@ -22,7 +22,7 @@ declarative workspace layouts, and package management in one repository.
 | Processes | [process-compose](https://github.com/F1bonacc1/process-compose) | Local multi-process orchestration |
 | Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
 | Git | [Git](https://git-scm.com/), [GitHub CLI](https://cli.github.com/), [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
-| AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex) | IDE and coding agents, shared skills, and MCP servers |
+| AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex), [Cursor Local Bridge](https://github.com/nozomi-koborinai/cursor-local-bridge) | IDE and coding agents, local agent runs, shared skills, and MCP servers |
 
 See the [`Brewfile`](./Brewfile) for the complete package list.
 
@@ -46,6 +46,9 @@ and tool integrations remain explicit:
   are linked into `~/.cursor/rules/`.
 - Machine-local preferences such as model, theme, and effort level remain in
   `~/.claude/settings.json` and are preserved during sync.
+- Cursor Local Bridge is installed from the `Brewfile`. Its
+  `~/.clb/config.json` holds a webhook URL and signing secret, so it stays
+  machine-local and is not managed here.
 
 ### Shared Skills
 
