@@ -54,4 +54,5 @@ cask "gcloud-cli"
 cask "hammerspoon"
 cask "karabiner-elements", args: { adopt: true }
 cask "ngrok"
+cask "nozomi-koborinai/tap/clb"
 cask "wezterm@nightly"
