@@ -5,13 +5,13 @@ alwaysApply: true
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
 # `inherit-parent` or `auto` as a value: the role runs on the parent chat model (omit Task `model` and spawn `generalPurpose`). Alias entries in a panel list still count toward its fan-out.
 # defaults: 3
-# budget: large (xhigh)
-feature, refactoring: claude-opus-5-5-xhigh
-bug-fix: claude-opus-5-5-xhigh
-perf-issue: claude-opus-5-5-xhigh
-hillclimb: claude-opus-5-5-xhigh
-judgment and prose: claude-opus-5-5-xhigh
-arena runners: gpt-5.6-sol-high, claude-opus-5-5-high, gemini-4-carbon-high
-arena cross-judge pool: claude-opus-5-5-high, gemini-4-carbon-high
-swarm workers: claude-opus-5-5-high
-interrogate reviewers: gpt-5.6-sol-high, claude-opus-5-5-high, gemini-4-carbon-high
+# budget: medium (high)
+feature, refactoring: claude-opus-5-5-high-fast
+bug-fix: claude-opus-5-5-high-fast
+perf-issue: claude-opus-5-5-high-fast
+hillclimb: claude-opus-5-5-high-fast
+judgment and prose: claude-opus-5-5-high-fast
+arena runners: gpt-5.6-sol-medium, claude-opus-5-5-medium-fast, gemini-4-neon-high
+arena cross-judge pool: claude-opus-5-5-medium-fast, gemini-4-neon-high
+swarm workers: claude-opus-5-5-medium-fast
+interrogate reviewers: gpt-5.6-sol-medium, claude-opus-5-5-medium-fast, gemini-4-neon-high
