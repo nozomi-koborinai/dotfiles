@@ -22,7 +22,7 @@ declarative workspace layouts, and package management in one repository.
 | Processes | [process-compose](https://github.com/F1bonacc1/process-compose) | Local multi-process orchestration |
 | Cloud & IaC | [Google Cloud CLI](https://cloud.google.com/sdk/gcloud), [Terraform](https://developer.hashicorp.com/terraform), [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) | Cloud development and infrastructure tooling |
 | Git | [Git](https://git-scm.com/), [GitHub CLI](https://cli.github.com/), [Lazygit](https://github.com/jesseduffield/lazygit) | Repository and pull request workflows |
-| AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex), [Cursor Local Bridge](https://github.com/nozomi-koborinai/cursor-local-bridge) | IDE and coding agents, local agent runs, shared skills, and MCP servers |
+| AI development | [Cursor](https://www.cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), [Codex](https://github.com/openai/codex), [Grok Build](https://x.ai/build), [Cursor Local Bridge](https://github.com/nozomi-koborinai/cursor-local-bridge) | IDE and coding agents, local agent runs, shared skills, and MCP servers |
 
 See the [`Brewfile`](./Brewfile) for the complete package list.
 

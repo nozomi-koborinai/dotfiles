@@ -51,6 +51,7 @@ cask "codex"
 cask "drawio", args: { adopt: true }
 cask "font-geist-mono-nerd-font"
 cask "gcloud-cli"
+cask "grok-build"
 cask "hammerspoon"
 cask "karabiner-elements", args: { adopt: true }
 cask "ngrok"
