@@ -9,7 +9,6 @@ brew "bash-completion"
 brew "zstd"
 brew "openjdk"
 brew "cloud-sql-proxy"
-brew "codex"
 brew "dart-sdk"
 brew "deno"
 brew "fd"
@@ -48,6 +47,7 @@ brew "docker-compose"
 brew "docker-credential-helper"
 
 cask "claude-code@latest", args: { adopt: true }
+cask "codex"
 cask "drawio", args: { adopt: true }
 cask "font-geist-mono-nerd-font"
 cask "gcloud-cli"
